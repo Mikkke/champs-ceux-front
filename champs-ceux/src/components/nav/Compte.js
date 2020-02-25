@@ -1,7 +1,7 @@
 import React from "react";
 
 const Compte = () => {
-  return <div>Je suis le compte</div>;
+  return <div>compte</div>;
 };
 
 export default Compte;
