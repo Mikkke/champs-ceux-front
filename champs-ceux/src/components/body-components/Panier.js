@@ -1,7 +1,11 @@
 import React from "react";
 
 const Panier = () => {
-  return <div>panier</div>;
+  return (
+    <div>
+      <h1>Sur le Panier</h1>
+    </div>
+  );
 };
 
 export default Panier;

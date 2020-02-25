@@ -1,7 +1,7 @@
-import React from "react";
+/* import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Accueil from "../nav/Accueil";
-import Produits from "../nav/Produits";
+import Produits from "../body-components/Produits";
 import Contact from "../nav/Contact";
 import Compte from "../nav/Compte";
 import Panier from "../nav/Panier";
@@ -20,4 +20,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Main; */
