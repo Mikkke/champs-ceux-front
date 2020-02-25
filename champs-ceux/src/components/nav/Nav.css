@@ -1,3 +1,26 @@
 .nav-header {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.nav-header a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    padding: 30px;
+    font-size: 17px;
+}
+.nav-header a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: black;
+    transition: width .5s;
+}
+
+.nav-header a:hover::after {
+    width: 100%;
 }
