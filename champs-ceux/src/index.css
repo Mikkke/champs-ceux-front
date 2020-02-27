@@ -1,6 +1,7 @@
 body {
   display: flex;
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -24,4 +25,22 @@ code {
 }
 .accueil div {
   color: white;
+}
+
+.produit-div {
+  display: flex;
+  justify-content: space-around;
+  height: 80%;
+  width: 100vw;
+}
+
+.my-card {
+  width: 10%;
+  display: flex;
+
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
