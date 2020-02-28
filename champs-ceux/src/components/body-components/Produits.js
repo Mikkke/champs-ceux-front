@@ -43,6 +43,7 @@ const Produits = () => {
             <div key={index} className="my-card">
               <Card>
                 <CardImg
+                  className="image"
                   top
                   width="100%"
                   src={`${apiBaseURL}${el.photo}`}
@@ -52,7 +53,12 @@ const Produits = () => {
                   <CardTitle>{el.nom}</CardTitle>
                   <CardSubtitle>{el.prix}</CardSubtitle>
                   <CardText>{el.quantite}</CardText>
-                  <Button variant="contained" color="primary"></Button>
+                  <Button variant="contained" color="primary" size="sm">
+                    Ajouter au panier
+                  </Button>
+                  <Button variant="contained" color="primary" size="sm">
+                    Voir produit
+                  </Button>
                 </CardBody>
               </Card>
             </div>

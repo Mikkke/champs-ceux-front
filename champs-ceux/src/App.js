@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+//import Footer from "./components/footer/Footer";
 import Accueil from "./components/body-components/Accueil";
 import Produit from "./components/body-components/Produits";
 import Contact from "./components/body-components/Contact";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/panier" component={Panier} />
       </Switch>
 
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
