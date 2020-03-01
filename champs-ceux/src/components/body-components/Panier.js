@@ -2,7 +2,7 @@ import React from "react";
 
 const Panier = () => {
   return (
-    <div>
+    <div className="panier">
       <h1>Sur le Panier</h1>
     </div>
   );

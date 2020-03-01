@@ -59,9 +59,9 @@ const Produits = props => {
                   alt="Card image cap"
                 />
                 <CardBody>
-                  <CardTitle>{el.nom}</CardTitle>
-                  <CardSubtitle>{el.prix}€</CardSubtitle>
-                  <CardText>{el.quantite} kilo</CardText>
+                  <CardTitle> produit : {el.nom}</CardTitle>
+                  <CardSubtitle> prix : {el.prix}€</CardSubtitle>
+                  <CardText>quantité : {el.quantite} kilo</CardText>
                   <Button
                     variant="contained"
                     color="primary"
