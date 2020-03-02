@@ -37,7 +37,7 @@ const Compte = () => {
           <label>Quantité : </label>{" "}
           <input ref={register} name="quantite" type="number" />
           <label>Photo : </label>{" "}
-          <input ref={register} name="photo" type="text" />
+          <input ref={register} name="photo" type="file" />
           <label>Description : </label>{" "}
           <textarea ref={register} name="description" />
           <input type="submit" value="ajouter a la liste" />
