@@ -3,6 +3,7 @@ import "./Nav.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getNumbers } from "../../actions/getActions";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Nav = props => {
   useEffect(() => {
@@ -15,7 +16,8 @@ const Nav = props => {
       <Link to="/contact">CONTACT</Link>
       <Link to="/compte">COMPTE</Link>
       <Link to="/panier">
-        PANIER<span> {props.cardProps.cardNumbers}</span>
+        <FaShoppingCart />
+        <span> {props.cardProps.cardNumbers}</span>
       </Link>
     </nav>
   );

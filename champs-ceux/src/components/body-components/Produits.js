@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle
+  Button /* , Modal, ModalHeader, ModalBody, ModalFooter  */
 } from "reactstrap";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { addCard } from "../../actions/addActions";
 
@@ -16,7 +10,7 @@ const initialUrl = `${apiBaseURL}/api/produits`;
 
 const Produits = props => {
   console.log("props :", props);
-  const { buttonLabel, className } = props;
+  /*   const { buttonLabel, className } = props; */
 
   const [modal, setModal] = useState(false);
 
@@ -47,48 +41,43 @@ const Produits = props => {
         <h1>Chargement...</h1>
       ) : (
         produit.map((el, index) => {
-          console.log(`${apiBaseURL}${el.photo}`);
+          console.log("coucou mike !!!", `${apiBaseURL}${el.photo}`);
+          const imgSrc = !el.photo.includes("firebasestorage.googleapis")
+            ? `${apiBaseURL}${el.photo}`
+            : el.photo;
           return (
             <div key={index} className="my-card">
-              <Card>
-                <CardImg
+              <div className="card">
+                <img
                   className="image"
-                  top
                   width="100%"
-                  src={`${apiBaseURL}${el.photo}`}
-                  alt="Card image cap"
+                  src={imgSrc}
+                  alt="produit"
                 />
-                <CardBody>
-                  <CardTitle> produit : {el.nom}</CardTitle>
-                  <CardSubtitle> prix : {el.prix}€</CardSubtitle>
-                  <CardText>quantité : {el.quantite} kilo</CardText>
+                <div className="card-body">
+                  <div className="card-title"> produit : {el.nom}</div>
+                  <div className="card-price"> prix : {el.prix}€</div>
+                  <div className="card-quantity">
+                    quantité : {el.quantite} kilo
+                  </div>
                   <Button
                     variant="contained"
                     color="primary"
                     size="sm"
                     onClick={props.addCard}
+                    className="addPanier"
                   >
                     Ajouter au panier
                   </Button>
-                  <Button color="danger" onClick={toggle}>
-                    {buttonLabel} voir produit
+                  <Button
+                    color="danger"
+                    onClick={toggle}
+                    className="see-produit"
+                  >
+                    voir produit
                   </Button>
-                  <Modal isOpen={modal} toggle={toggle} className={className}>
-                    <ModalHeader key={index} toggle={toggle}>
-                      {el.nom}
-                    </ModalHeader>
-                    <ModalBody key={index}>{el.description}</ModalBody>
-                    <ModalFooter>
-                      <Button color="primary" onClick={toggle}>
-                        Ajouter au panier
-                      </Button>{" "}
-                      <Button color="secondary" onClick={toggle}>
-                        Quitter
-                      </Button>
-                    </ModalFooter>
-                  </Modal>
-                </CardBody>
-              </Card>
+                </div>
+              </div>
             </div>
           ); //<p key={index}>{el.nom}</p>;
         })

@@ -79,19 +79,15 @@ background: rgba(0, 0, 0, 0.53);
   margin: 0;
   padding: 0;
   height: 100%;
-
-
-  
-  
-  
   
 }
 
 .my-card {
-  width: 300px;
+  width: 200px;
   height: 300px;
   padding: 40px;
   margin: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,.651);
 
 }
 
@@ -100,7 +96,8 @@ a {
   color: inherit;
 }
 .image {
-  width: 120px;
+  width: 200px;
+  height: 200px;
 }
 
 .contact {
