@@ -19,6 +19,7 @@ const Nav = props => {
         <FaShoppingCart />
         <span> {props.cardProps.cardNumbers}</span>
       </Link>
+      <Link to="/signup">SignUp</Link>
     </nav>
   );
 };

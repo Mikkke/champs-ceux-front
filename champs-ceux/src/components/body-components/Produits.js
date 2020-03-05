@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import {
-  Button /* , Modal, ModalHeader, ModalBody, ModalFooter  */
-} from "reactstrap";
 import { connect } from "react-redux";
 import { addCard } from "../../actions/addActions";
 
@@ -11,10 +8,6 @@ const initialUrl = `${apiBaseURL}/api/produits`;
 const Produits = props => {
   console.log("props :", props);
   /*   const { buttonLabel, className } = props; */
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
 
   const [produit, setProduit] = useState([]);
   console.log("composant produit", produit);
@@ -60,7 +53,7 @@ const Produits = props => {
                   <div className="card-quantity">
                     quantité : {el.quantite} kilo
                   </div>
-                  <Button
+                  <button
                     variant="contained"
                     color="primary"
                     size="sm"
@@ -68,14 +61,14 @@ const Produits = props => {
                     className="addPanier"
                   >
                     Ajouter au panier
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     color="danger"
-                    onClick={toggle}
+                    /* onClick={toggle} */
                     className="see-produit"
                   >
                     voir produit
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

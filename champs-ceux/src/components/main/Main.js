@@ -7,6 +7,7 @@ import Compte from "../body-components/Compte";
 import Panier from "../body-components/Panier";
 import "./main.css";
 import Header from "../header/Header";
+import SignUp from "../body-components/SignUp";
 
 const Main = () => {
   return (
@@ -19,6 +20,7 @@ const Main = () => {
           <Route path="/contact" component={Contact} />
           <Route path="/compte" component={Compte} />
           <Route path="/panier" component={Panier} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
