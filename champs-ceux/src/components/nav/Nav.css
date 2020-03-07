@@ -26,3 +26,10 @@
 .nav-header a:hover::after {
     width: 100%;
 }
+
+@media screen and (max-width: 480px) {
+    .nav-header {
+      width: 100%;
+      clear:both;
+    }
+  }

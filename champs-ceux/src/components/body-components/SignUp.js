@@ -1,17 +1,38 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+//import { useForm } from "react-hook-form";
+//import * as yup from "yup";
+import withFirebaseAuth from "react-with-firebase-auth";
+import { firebase, fireAuth } from "../../firebase/Firebase";
 import axios from "axios";
 
-const schema = yup.object().shape({
+const firebaseAppAuth = fireAuth;
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider()
+};
+/* const schema = yup.object().shape({
   nom: yup
     .string()
     .max(30, "le nom dois compter 30 caracteres maximum")
     .required("ce champs est requis")
-});
+});*/
 
-const SignUp = () => {
-  const { register, handleSubmit, errors } = useForm({
+const SignUp = ({ user, signOut, signInWithGoogle }) => {
+  async function callApi() {
+    await axios.get("http://localhost:8000/api/auth");
+  }
+
+  React.useEffect(() => {
+    if (user) {
+      user
+        .getIdToken()
+        .then(idToken => {
+          console.log("idToken", idToken);
+          axios.defaults.headers.common["Authorization"] = idToken;
+        })
+        .catch(err => console.log(err));
+    }
+  }, [user]);
+  /*const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
 
@@ -24,10 +45,22 @@ const SignUp = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
   return (
     <div>
+      {user ? <p>Salut, {user.displayName}</p> : <p>Login stp</p>}
+      {user ? (
+        <>
+          <button onClick={signOut}>Déconnexion</button>
+          <button onClick={() => callApi(user)}>ping Serveur</button>
+        </>
+      ) : (
+        <button onClick={signInWithGoogle}>Se login avec Google</button>
+      )}
+    </div>
+  );
+  /*    <div>
       <div className="sign-div-form">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nom</label>
@@ -46,8 +79,12 @@ const SignUp = () => {
           <input type="submit" value="inscription" />
         </form>
       </div>
-    </div>
+    </div> 
   );
+  */
 };
 
-export default SignUp;
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth
+})(SignUp);

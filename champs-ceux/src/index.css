@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: red;
 
 }
 
@@ -25,6 +26,22 @@ code {
   background-size: cover;
   height: 90vh;
 }
+
+.accueil::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.53);
+  }
+  .accueil .text-div {
+    color: white;
+    
+  }
+
 .text-div {
   position: absolute;
   left: 250px;
@@ -53,20 +70,7 @@ transition: transform 0.4s;
   transform: scale(1.12);
   
 }
-.accueil::after {
-content: "";
-position: absolute;
-z-index: -1;
-top: 0;
-left: 0;
-height: 100%;
-width: 100%;
-background: rgba(0, 0, 0, 0.53);
-}
-.accueil .text-div {
-  color: white;
-  
-}
+
 
 .produit-div {
   display: flex;
@@ -251,3 +255,5 @@ a {
 .sign-div-form form label {
   padding: 10px 0 10px 0;
 }
+
+
