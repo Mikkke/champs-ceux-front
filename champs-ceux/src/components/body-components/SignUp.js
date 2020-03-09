@@ -4,6 +4,8 @@ import React from "react";
 import withFirebaseAuth from "react-with-firebase-auth";
 import { firebase, fireAuth } from "../../firebase/Firebase";
 import axios from "axios";
+import { checkToken } from "../../actions/checkToken";
+import { connect } from "react-redux";
 
 const firebaseAppAuth = fireAuth;
 const providers = {
@@ -21,7 +23,7 @@ const SignUp = ({ user, signOut, signInWithGoogle }) => {
     await axios.get("http://localhost:8000/api/auth");
   }
 
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     if (user) {
       user
         .getIdToken()
@@ -31,21 +33,12 @@ const SignUp = ({ user, signOut, signInWithGoogle }) => {
         })
         .catch(err => console.log(err));
     }
-  }, [user]);
-  /*const { register, handleSubmit, errors } = useForm({
-    validationSchema: schema
+  }, [user]); */
+  React.useEffect(() => {
+    checkToken();
+    console.log("le token ");
+    console.log(user, "user");
   });
-
-  const onSubmit = async data => {
-    console.log(data);
-
-    try {
-      const res = await axios.post("http://localhost:8080/api/users", data);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
 
   return (
     <div>
@@ -60,28 +53,6 @@ const SignUp = ({ user, signOut, signInWithGoogle }) => {
       )}
     </div>
   );
-  /*    <div>
-      <div className="sign-div-form">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Nom</label>
-          <input ref={register} name="nom" type="text" />
-          {errors.nom && errors.nom.message}
-          <label>Prenom</label>
-          <input ref={register} name="prenom" type="text" />
-          <label>Mot de passe</label>
-          <input ref={register} name="password" type="text" />
-          <label>Telephone</label>
-          <input ref={register} name="telephone" type="tel" />
-          <label>Email</label>
-          <input ref={register} name="email" type="email" />
-          <label>Adresse</label>
-          <input ref={register} name="adresse" type="text" />
-          <input type="submit" value="inscription" />
-        </form>
-      </div>
-    </div> 
-  );
-  */
 };
 
 export default withFirebaseAuth({

@@ -1,2 +1,3 @@
 export const ADD_PRODUCT_CARD = "ADD_PRODUCT_CARD";
 export const GET_NUMBERS_IN_CARD = "GET_NUMBERS_IN_CARD";
+export const CHECK_TOKEN = "CHECK_TOKEN";

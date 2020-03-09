@@ -1,14 +1,10 @@
 import React from "react";
-import Logo from "../logo/Logo";
-import Nav from "../nav/Nav";
-import "./header.css";
-/* import { GiHamburgerMenu } from "react-icons/gi"; */
+import Logo from "../nav-bar/Logo";
+import Nav from "../nav-bar/Nav";
+
 const Header = () => {
   return (
     <header className="header">
-      {/* <GiHamburgerMenu className="menu" size={40} /> */}
-      <Logo />
-      <p>ChampsCeux</p>
       <Nav />
     </header>
   );

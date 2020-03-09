@@ -1,12 +1,10 @@
-import React from "react";
+/* import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Accueil from "../body-components/Accueil";
 import Produit from "../body-components/Produits";
 import Contact from "../body-components/Contact";
 import Compte from "../body-components/Compte";
 import Panier from "../body-components/Panier";
-import "./main.css";
-import Header from "../header/Header";
 import SignUp from "../body-components/SignUp";
 
 const Main = () => {
@@ -23,9 +21,10 @@ const Main = () => {
           <Route path="/signup" component={SignUp} />
         </Switch>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 };
 
 export default Main;
+ */
