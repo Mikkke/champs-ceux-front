@@ -1,4 +1,4 @@
-.nav-header {
+nav-header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.nav-header a {
+nav-header a {
     display: inline-block;
     text-decoration: none;
     color: black;
@@ -14,7 +14,7 @@
     font-size: 17px;
     letter-spacing: 2px;
 }
-.nav-header a::after {
+nav-header a::after {
     content: "";
     display: block;
     width: 0;
@@ -23,13 +23,13 @@
     transition: width .5s;
 }
 
-.nav-header a:hover::after {
+nav-header a:hover::after {
     width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
     .nav-header {
       width: 100%;
       clear:both;
     }
-  }
+  } */

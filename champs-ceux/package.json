@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "firebase": "^7.9.3",
+    "node-sass": "^4.13.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-hook-form": "^4.9.8",
@@ -22,6 +23,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.0.1",
     "yup": "^0.28.1"
   },
   "scripts": {

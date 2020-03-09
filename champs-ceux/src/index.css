@@ -1,12 +1,15 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+}
+body {
+  
   font-family: 'Montserrat',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: red;
+
 
 }
 
@@ -15,7 +18,7 @@ code {
     monospace;
 }
 
-.accueil {
+accueil {
   display: flex;
   align-items: center;
   position: relative;
@@ -27,7 +30,7 @@ code {
   height: 90vh;
 }
 
-.accueil::after {
+accueil::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -42,18 +45,18 @@ code {
     
   }
 
-.text-div {
+text-div {
   position: absolute;
   left: 250px;
   width: 350px;
   letter-spacing: 2px;
 }
-.text-div h2{
+text-div h2{
 padding: 20px;
 }
 
 
-.text-div .btn {
+text-div .btn {
   text-align: center;
 font-size: 20px;
 padding: 10px;
@@ -66,13 +69,13 @@ transform: scale(1);
 transition: transform 0.4s;
 
 }
-.text-div .btn:hover {
+text-div .btn:hover {
   transform: scale(1.12);
   
 }
 
 
-.produit-div {
+produit-div {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -86,7 +89,7 @@ transition: transform 0.4s;
   
 }
 
-.my-card {
+my-card {
   width: 200px;
   height: 300px;
   padding: 40px;
@@ -99,12 +102,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.image {
+image {
   width: 200px;
   height: 200px;
 }
 
-.contact {
+contact {
   width: 100%;
   height: 90vh;
   display: flex;
@@ -115,32 +118,32 @@ a {
   color: aliceblue;
   
 }
-.contact h1 {
+contact h1 {
   padding-top: 20px;
 }
-.container-contact {
+container-contact {
   display: flex;
   align-items: center;
   width: 80%;
 }
 
-.form-div {
+form-div {
   width: 100%;
   height: 80%;
   padding: 20px;
 
 }
 
-.form-div form {
+form-div form {
   outline: none;
   display: flex;
   flex-direction: column;
 }
-.form-div form label {
+form-div form label {
   font-size: 20px;
 }
 
-.form-div form input {
+form-div form input {
   width: 300px;
   height: 40px;
   border-radius: 5px;
@@ -148,7 +151,7 @@ a {
   background-color: hsla(0,0%,100%,.95);
 }
 
-.form-div form select {
+form-div form select {
   width: 300px;
   height: 40px;
   border-radius: 5px;
@@ -156,7 +159,7 @@ a {
   background-color: hsla(0,0%,100%,.95);
 }
 
-.form-div form textarea {
+form-div form textarea {
   width: 400px;
   height: 150px;
   border-radius: 5px;
@@ -164,7 +167,7 @@ a {
   background-color: hsla(0,0%,100%,.95);
 }
 
-.form-div form .send {
+form-div form .send {
   width: 200px;
   margin-top: 10px;
   outline: none;
@@ -175,11 +178,11 @@ a {
   border: 1px solid #043e6e;
   font-size: 20px;
 }
-.form-div form .send:hover {
+form-div form .send:hover {
   transform: scale(1.15);
 }
 
-.reseaux {
+reseaux {
   display: flex;
   height: 300px;
   flex-direction: column;
@@ -187,56 +190,56 @@ a {
   text-align: center;
 
 }
-.reseaux h1 {
+reseaux h1 {
   font-size: 20px;
 }
-.reseaux h2 {
+reseaux h2 {
   font-size: 20px;
 }
-.reseaux a {
+reseaux a {
   font-size: 30px;
 }
-.social {
+social {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.social .insta {
+social insta {
   transform: rotate(0deg) scale(1);
   transition: transform 0.4s;
 
 }
 
-.social .insta:hover {
+social insta:hover {
   transform: rotate(-12deg) scale(1.10);
   color: #C51464;
 }
 
-.social .facebook {
+social facebook {
   transform: rotate(0deg) scale(1);
   transition: transform 0.4s;
 
 }
 
-.social .facebook:hover {
+social facebook:hover {
   transform: rotate(12deg) scale(1.10);
   color: #4267B2;
 }
 
-.panier {
+panier {
   width: 100%;
   height: 90vh;
 }
 
-.sign-div-form {
+sign-div-form {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 80vh;
 }
-.sign-div-form form{
+sign-div-form form{
   font-size: 15px;
   width: 40%;
   display: flex;
@@ -247,12 +250,12 @@ a {
 
 }
 
-.sign-div-form form input {
+sign-div-form form input {
   height: 20px;
   width: 300px;
 }
 
-.sign-div-form form label {
+sign-div-form form label {
   padding: 10px 0 10px 0;
 }
 

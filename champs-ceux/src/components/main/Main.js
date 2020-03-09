@@ -11,9 +11,9 @@ import SignUp from "../body-components/SignUp";
 
 const Main = () => {
   return (
-    <div className="main-div">
-      <BrowserRouter>
-        <Header />
+    <BrowserRouter>
+      <Header />
+      <div className="main-div">
         <Switch>
           <Route exact path="/" component={Accueil}></Route>
           <Route path="/produits" component={Produit} />
@@ -22,9 +22,9 @@ const Main = () => {
           <Route path="/panier" component={Panier} />
           <Route path="/signup" component={SignUp} />
         </Switch>
-        {/* <Footer /> */}
-      </BrowserRouter>
-    </div>
+      </div>
+      {/* <Footer /> */}
+    </BrowserRouter>
   );
 };
 

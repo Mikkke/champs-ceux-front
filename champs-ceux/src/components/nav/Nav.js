@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getNumbers } from "../../actions/getActions";
 import { FaShoppingCart } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Nav = props => {
   useEffect(() => {
     getNumbers();
   });
   return (
-    <nav className="nav-header">
+    <nav className="nav-header-responsive">
       <Link to="/">ACCUEIL</Link>
       <Link to="/produits">PRODUITS</Link>
       <Link to="/contact">CONTACT</Link>
@@ -20,6 +21,7 @@ const Nav = props => {
         <span> {props.cardProps.cardNumbers}</span>
       </Link>
       <Link to="/signup">SignUp</Link>
+      <GiHamburgerMenu className="burger" />
     </nav>
   );
 };

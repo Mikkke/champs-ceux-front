@@ -1,0 +1,57 @@
+@import "./reset.scss";
+@import "./responsive.scss";
+
+body {
+  padding: 0;
+  margin: 0;
+  background: red;
+  font-family: "Montserrat";
+
+  header{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 65px;
+    width: 100%;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+    background: white;
+    img {
+      width: 70px;
+      height: 60px;
+      margin: 10px;
+      cursor: pointer;
+      margin: 0 155px 0 70px;
+  } 
+  p{
+display: none;
+  }
+  nav.nav-header-responsive {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    .burger {
+      display: none;
+    }
+  }
+
+  }
+
+  @media screen and (max-width:849px) {
+    header{
+      background:green;
+      nav.nav-header-responsive {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        .burger {
+          display: block;
+        }
+      }
+    } 
+  }
+
+}
