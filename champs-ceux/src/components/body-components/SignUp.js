@@ -41,7 +41,7 @@ const SignUp = ({ user, signOut, signInWithGoogle }) => {
   });
 
   return (
-    <div>
+    <div className="sign-up">
       {user ? <p>Salut, {user.displayName}</p> : <p>Login stp</p>}
       {user ? (
         <>

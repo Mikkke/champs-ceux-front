@@ -11,6 +11,7 @@ body {
     background-image: url("../assets/tracteur.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 
     .text-div{
       position: absolute;
@@ -23,6 +24,8 @@ body {
         border: 1px solid white;
         border-radius: 25px;
         padding: 10px;
+        width: 200px;
+        overflow: hidden;
         background: rgba(248, 246, 246, 0);
         &:hover {
           background: rgba(248, 246, 246, 0.938);
@@ -31,6 +34,7 @@ body {
         a {
           color: white;
           text-decoration: none;
+          font-size: 20px;
         }
         
       }
@@ -43,6 +47,7 @@ body {
   flex-flow: row wrap;
   justify-content: space-around;
     width: 100%;
+    margin-top: 90px;
     .my-card{
       width: 200px;
   height: 300px;
@@ -55,4 +60,50 @@ body {
     }
 }
 
+.contact {
+  background-image: url("../assets/plantation.jpg");
+  width: 100%;
+  height: calc(110vh - 10px);
+  color: white;
+  margin-top: 62px;
+  text-align: center;
+  h1 {
+padding-top: 20px;
+  }
+  .container-contact {
+    display: flex;
+    .form-div {
+      display: flex;
+    }
+  }
 }
+
+.panier {
+  margin-top: 90px;
+}
+
+.sign-up {
+  margin-top: 90px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+@media  screen and (max-width : 480px) {
+  
+  .accueil{
+  
+  
+    background-position: left !important;
+    h2 {
+      font-size: 30px;
+    }
+  }
+  }
