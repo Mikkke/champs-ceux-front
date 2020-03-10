@@ -1,16 +1,16 @@
 import * as types from "./types";
+import axios from "axios";
 import store from "../store";
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/auth`;
-export const checkToken = () => {
-  return dispatch => {
-    const state = store.getState();
-    return fetch(initialUrl)
-      .then(response => response.json())
-      .then(json => {
-        console.log(json);
-        dispatch({ type: types.CHECK_TOKEN, payload: json });
-        console.log("state :", state);
-      });
-  };
+export const checkToken = () => async dispatch => {
+  const state = store.getState();
+  console.log("state", state);
+  const res = await axios.get(initialUrl);
+  console.log("res", res);
+  dispatch({
+    type: types.CHECK_TOKEN,
+    payload: res.data.uid
+  });
+  console.log("after", state);
 };

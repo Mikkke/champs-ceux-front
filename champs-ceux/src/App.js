@@ -17,7 +17,8 @@ import Produit from "./components/body-components/Produits";
 import Contact from "./components/body-components/Contact";
 import Compte from "./components/body-components/Compte";
 import Panier from "./components/body-components/Panier";
-import SignUp from "./components/body-components/SignUp";
+/* import SignUp from "./components/body-components/SignUp"; */
+import SignUpContainer from "./containers/SignUpContainer";
 
 class App extends Component {
   state = {
@@ -42,7 +43,7 @@ class App extends Component {
             <Route path="/contact" component={Contact} />
             <Route path="/compte" component={Compte} />
             <Route path="/panier" component={Panier} />
-            <Route path="/signup" component={SignUp} />
+            <Route path="/signup" component={SignUpContainer} />
           </Switch>
           {/* <Footer /> */}
         </BrowserRouter>

@@ -18,12 +18,13 @@ const providers = {
     .required("ce champs est requis")
 });*/
 
-const SignUp = ({ user, signOut, signInWithGoogle }) => {
+const SignUp = props => {
+  const { user, signInWithGoogle, signOut } = props;
   async function callApi() {
     await axios.get("http://localhost:8000/api/auth");
   }
 
-  /*   React.useEffect(() => {
+  React.useEffect(() => {
     if (user) {
       user
         .getIdToken()
@@ -33,12 +34,13 @@ const SignUp = ({ user, signOut, signInWithGoogle }) => {
         })
         .catch(err => console.log(err));
     }
-  }, [user]); */
-  React.useEffect(() => {
+    props.checkToken();
+  }, [user]);
+  /* React.useEffect(() => {
     checkToken();
     console.log("le token ");
     console.log(user, "user");
-  });
+  }); */
 
   return (
     <div className="sign-up">

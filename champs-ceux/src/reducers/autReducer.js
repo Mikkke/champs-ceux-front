@@ -11,6 +11,7 @@ export default function auth(state = initialState, action) {
     case types.CHECK_TOKEN:
       return {
         ...state,
+        isAuth: action.payload ? true : false,
         user: action.payload
       };
     default:
