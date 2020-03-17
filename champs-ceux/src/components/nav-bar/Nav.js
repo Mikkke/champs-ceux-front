@@ -73,6 +73,7 @@ const NavBar = styled(animated.nav)`
   background: white;
   z-index: 1;
   font-size: 1rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
 `;
 
 const FlexContainer = styled.div`
@@ -90,7 +91,7 @@ const NavLinks = styled(animated.ul)`
   margin: auto 0;
 
   & a {
-    color: #dfe6e9;
+    color: black;
     text-transform: uppercase;
     font-weight: 600;
     border-bottom: 1px solid transparent;
@@ -101,7 +102,6 @@ const NavLinks = styled(animated.ul)`
 
     &:hover {
       color: #fdcb6e;
-      border-bottom: 1px solid #fdcb6e;
     }
 
     @media (max-width: 888px) {
