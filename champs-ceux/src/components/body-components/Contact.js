@@ -6,24 +6,23 @@ const Contact = () => {
     <div className="contact">
       <h1>Contacts</h1>
       <div className="container-contact">
-        <div className="form-div">
-          <form>
-            <label>Nom :</label>
-            <input type="text" />
-            <label>Prenom :</label>
-            <input type="text" />
-            <label>Mail :</label>
-            <input type="email" />
-            <label>Je suis :</label>
-            <select id="cars" name="carlist" form="carform">
-              <option value="agriculteur">Agriculteur</option>
-              <option value="acheteur">Acheteur</option>
-            </select>
-            <label>Commentaire :</label>
-            <textarea></textarea>
-            <input type="submit" className="send" value="Envoyer" />
-          </form>
-        </div>
+        <form className="form-div">
+          <label>Nom</label>
+          <input type="text" />
+          <label>Prenom</label>
+          <input type="text" />
+          <label>Mail</label>
+          <input type="email" />
+          <label>Je suis</label>
+          <select id="cars" name="carlist" form="carform">
+            <option value="agriculteur">Agriculteur</option>
+            <option value="acheteur">Acheteur</option>
+          </select>
+          <label>Commentaire</label>
+          <textarea />
+          <input type="submit" className="send" value="Envoyer" />
+        </form>
+
         <div className="reseaux">
           <h1>Email :</h1>
           <a href="/">champsceux@champceux.com</a>

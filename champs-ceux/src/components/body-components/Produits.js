@@ -48,11 +48,9 @@ const Produits = props => {
                   alt="produit"
                 />
                 <div className="card-body">
-                  <div className="card-title"> produit : {el.nom}</div>
-                  <div className="card-price"> prix : {el.prix}€</div>
-                  <div className="card-quantity">
-                    quantité : {el.quantite} kilo
-                  </div>
+                  <h1 className="card-title">{el.nom}</h1>
+                  <p className="card-price">{el.prix}€</p>
+                  <p className="card-quantity">{el.quantite} KG</p>
                   <button
                     variant="contained"
                     color="primary"
