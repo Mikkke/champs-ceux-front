@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 //import { useForm } from "react-hook-form";
 //import * as yup from "yup";
 import withFirebaseAuth from "react-with-firebase-auth";
 import { firebase, fireAuth } from "../../firebase/Firebase";
 import axios from "axios";
-import { checkToken } from "../../actions/checkToken";
-import { connect } from "react-redux";
+/* import { checkToken } from "../../actions/checkToken";
+import { connect } from "react-redux"; */
 
 const firebaseAppAuth = fireAuth;
 const providers = {
@@ -24,7 +24,7 @@ const SignUp = props => {
     await axios.get("http://localhost:8000/api/auth");
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       user
         .getIdToken()

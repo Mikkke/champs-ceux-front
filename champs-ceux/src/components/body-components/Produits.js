@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { addCard } from "../../actions/addActions";
+import Modal from "../modal/Modal";
+import Axios from "axios";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
@@ -24,10 +26,47 @@ const Produits = props => {
       .catch(err => console.error("vous avez une erreur", err));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getProduitData(initialUrl);
   }, []);
 
+  const [openModal, setOpenModal] = useState(false);
+  const [produitInfos, setProduitInfos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const showModal = id => {
+    setOpenModal(true);
+    Axios.get(`${initialUrl}/${id}`)
+      .then(res => {
+        setProduitInfos(res.data);
+        setLoading(false);
+      })
+      .catch(err => console.log(err));
+  };
+  const closeModal = () => {
+    setOpenModal(false);
+    setLoading(true);
+  };
+  const resultInModal = !loading ? (
+    <Fragment>
+      <div className="modalHeader">
+        <h2>Titre</h2>
+      </div>
+      <div className="modalBody">
+        <h3>Titre 2</h3>
+      </div>
+      <div className="modalFooter">
+        <button className="modalBtn" onClick={closeModal}>
+          Fermer
+        </button>
+        <button className="modalBtn1" onClick={props.addCard}>
+          Ajouter au panier
+        </button>
+      </div>
+    </Fragment>
+  ) : (
+    <h1>Je charge</h1>
+  );
   return (
     <div className="produit-div">
       {produit.length === 0 ? (
@@ -64,6 +103,7 @@ const Produits = props => {
                     color="danger"
                     /* onClick={toggle} */
                     className="see-produit"
+                    onClick={() => showModal(el.id)}
                   >
                     voir produit
                   </button>
@@ -73,6 +113,9 @@ const Produits = props => {
           ); //<p key={index}>{el.nom}</p>;
         })
       )}
+      <Modal showModal={openModal} closeModal={closeModal}>
+        {resultInModal}
+      </Modal>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-const refStorage = firebase.storage().ref("image_produit" + "fileName");
+const refStorage = firebase.storage().ref(`image_produitfileName`); //modif ici avec tidle et
 const fireAuth = firebase.auth();
 
 export { fireAuth, firebase, refStorage as default };
