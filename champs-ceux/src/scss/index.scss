@@ -53,7 +53,7 @@ body {
   .my-card{
     display: inline-block;
     width: 200px;
-    height: 300px;
+    min-height: 300px;
     padding: 15px;
     margin: 20px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -161,6 +161,22 @@ body {
         justify-content: space-around;
       }
     }
+  }
+}
+
+.compte-div {
+  text-align: center;
+  margin-top: 60px;
+  height: calc(110vh - 10px);
+  border: 3px solid yellow;
+  font-size: 1em;
+  .compte-sous-div{  
+    
+    border: 1px solid green;
+    background: green;
+    height: 80%;
+    width: 100%;
+
   }
 }
 

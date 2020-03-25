@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { firebase, refStorage } from "../../firebase/Firebase";
+import NavCompte from "../compte-components/NavCompte";
 
 const schema = yup.object().shape({
   nom: yup
@@ -45,9 +46,13 @@ const Compte = () => {
   };
 
   return (
-    <div>
-      <h1>Mon Compte</h1>
-      <div>
+    <div className="compte-div">
+      <h1>Compte</h1>
+
+      <button>Inscription</button>
+      <button>Connexion</button>
+
+      {/*       <div className="compte-produit-div">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nom : </label> <input ref={register} name="nom" type="text" />
           {errors.nom && errors.nom.message}
@@ -61,7 +66,7 @@ const Compte = () => {
           <textarea ref={register} name="description" />
           <input type="submit" value="ajouter a la liste" />
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };
