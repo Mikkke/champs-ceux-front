@@ -11,4 +11,5 @@ export default Logo;
 const Image = styled.img`
   height: 85%;
   margin: 0 0;
+  cursor: pointer;
 `;

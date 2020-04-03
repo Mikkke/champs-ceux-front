@@ -7,8 +7,8 @@ import Axios from "axios";
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
 
-const Produits = props => {
-  console.log("props :", props);
+const Produits = ({ addCard }) => {
+  console.log("props produit:");
   /*   const { buttonLabel, className } = props; */
 
   const [produit, setProduit] = useState([]);
@@ -59,7 +59,7 @@ const Produits = props => {
         <button className="modalBtn" onClick={closeModal}>
           Fermer
         </button>
-        <button className="modalBtn1" onClick={props.addCard}>
+        <button className="modalBtn1" onClick={addCard}>
           Ajouter au panier
         </button>
       </div>
@@ -88,29 +88,22 @@ const Produits = props => {
                 />
                 <div className="card-body">
                   <h1 className="card-title">{el.nom}</h1>
-                  <p className="card-price">{el.prix}€</p>
-                  <p className="card-quantity">{el.quantite} KG</p>
+                  <p>{el.prix}€</p>
+                  <p>{el.quantite} KG</p>
                   <button
                     variant="contained"
                     color="primary"
                     size="sm"
-                    onClick={props.addCard}
+                    onClick={addCard}
                     className="addPanier"
                   >
                     Ajouter au panier
                   </button>
-                  <button
-                    color="danger"
-                    /* onClick={toggle} */
-                    className="see-produit"
-                    onClick={() => showModal(el.id)}
-                  >
-                    voir produit
-                  </button>
+                  <button onClick={() => showModal(el.id)}>voir produit</button>
                 </div>
               </div>
             </div>
-          ); //<p key={index}>{el.nom}</p>;
+          );
         })
       )}
       <Modal showModal={openModal} closeModal={closeModal}>
