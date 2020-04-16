@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { fireAuth } from "../../firebase/Firebase";
 
-const Inscription = () => {
+const Inscription = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  /* const [isAdmin, setIsAdmin] = useState(true); */
   const [confirmPassword, setConfirmPassword] = useState("");
   const handleSignUp = e => {
     e.preventDefault();
@@ -12,7 +13,10 @@ const Inscription = () => {
     if (password === confirmPassword) {
       fireAuth
         .createUserWithEmailAndPassword(email, password)
-        .then(user => console.log("user :", user))
+        .then(user => {
+          console.log("user :", user);
+          props.history.push("/navCompte");
+        })
         .catch(err => console.log("err :", err));
     } else {
       alert("les mot de passe ne correspondent pas");
@@ -38,6 +42,17 @@ const Inscription = () => {
           />
           <label htmlFor="email">Email</label>
         </div>
+        {/*     <div className="inputBox">
+          <label>
+            Admin:
+            <input
+              name="isAdmin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={e => console.log(setIsAdmin(e.target.checked))}
+            />
+          </label>
+        </div> */}
         <div className="inputBox">
           <input
             type="password"

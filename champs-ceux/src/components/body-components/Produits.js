@@ -31,8 +31,9 @@ const Produits = ({ addCard }) => {
   }, []);
 
   const [openModal, setOpenModal] = useState(false);
-  const [produitInfos, setProduitInfos] = useState([]);
+  const [produitInfos, setProduitInfos] = useState({});
   const [loading, setLoading] = useState(true);
+  console.log("produitInfos :", produitInfos);
 
   const showModal = id => {
     setOpenModal(true);
@@ -50,10 +51,10 @@ const Produits = ({ addCard }) => {
   const resultInModal = !loading ? (
     <Fragment>
       <div className="modalHeader">
-        <h2>Titre</h2>
+        <h2>{produitInfos.nom}</h2>
       </div>
       <div className="modalBody">
-        <h3>Titre 2</h3>
+        <h3>{produitInfos.description}</h3>
       </div>
       <div className="modalFooter">
         <button className="modalBtn" onClick={closeModal}>

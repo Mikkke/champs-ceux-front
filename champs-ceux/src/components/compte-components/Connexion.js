@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { fireAuth } from "../../firebase/Firebase";
 
-const Connexion = () => {
+const Connexion = props => {
+  console.log("props connexion :", props);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignIn = e => {
@@ -10,7 +11,10 @@ const Connexion = () => {
 
     fireAuth
       .signInWithEmailAndPassword(email, password)
-      .then(user => console.log("user :", user))
+      .then(user => {
+        console.log("user :", user.displayName);
+        props.history.push("/navCompte");
+      })
       .catch(err => console.log("err :", err));
   };
 

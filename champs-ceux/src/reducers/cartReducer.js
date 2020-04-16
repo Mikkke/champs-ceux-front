@@ -7,7 +7,44 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  produit: [{}],
+  produits: [
+    {
+      id: 1,
+      title: "Winter body",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    },
+    {
+      id: 2,
+      title: "Adidas",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    },
+    {
+      id: 3,
+      title: "Vans",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    },
+    {
+      id: 4,
+      title: "White",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    },
+    {
+      id: 5,
+      title: "Cropped-sho",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    },
+    {
+      id: 6,
+      title: "Blues",
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
+    }
+  ],
   addedItems: [],
   total: 0
 };

@@ -9,8 +9,7 @@ import { connect } from "react-redux"; */
 
 const firebaseAppAuth = fireAuth;
 const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-  mailProvider: new firebase.auth.EmailAuthProvider()
+  googleProvider: new firebase.auth.GoogleAuthProvider()
 };
 /* const schema = yup.object().shape({
   nom: yup
@@ -20,7 +19,7 @@ const providers = {
 });*/
 
 const SignUp = props => {
-  console.log("props signup props :", props);
+  console.log("props signup props du signUp:", props);
   const { user, signInWithGoogle, signOut } = props;
   async function callApi() {
     await axios.get("http://localhost:8000/api/auth");

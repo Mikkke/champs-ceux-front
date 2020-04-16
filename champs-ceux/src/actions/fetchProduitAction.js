@@ -28,7 +28,7 @@ export const fetchProduitFailure = error => {
 
 export const fetchProduit = () => {
   return dispatch => {
-    dispatch(fetchProduitRequest);
+    dispatch(fetchProduitRequest());
     axios
       .get(initialUrl)
       .then(res => {

@@ -22,6 +22,10 @@ import SignUpContainer from "./containers/SignUpContainer";
 import IndexCompte from "./components/body-components/IndexCompte";
 import Inscription from "./components/compte-components/Inscription";
 import Connexion from "./components/compte-components/Connexion";
+import Produits from "./components/compte-components/Produits.compte";
+import Utilisateur from "./components/compte-components/Utilisateur.compte";
+import Historique from "./components/compte-components/Historique.compte";
+import NavCompte from "./components/compte-components/NavCompte";
 
 class App extends Component {
   state = {
@@ -33,6 +37,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("this.props :", this.props);
     return (
       <Provider store={store}>
         <BrowserRouter>
@@ -50,6 +55,10 @@ class App extends Component {
             <Route path="/signup" component={SignUpContainer} />
             <Route path="/inscription" component={Inscription} />
             <Route path="/connexion" component={Connexion} />
+            <Route path="/produitcomp" component={Produits} />
+            <Route path="/compte" component={Utilisateur} />
+            <Route path="/historique" component={Historique} />
+            <Route path="/navCompte" component={NavCompte} />
           </Switch>
           {/* <Footer /> */}
         </BrowserRouter>

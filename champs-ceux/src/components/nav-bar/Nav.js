@@ -3,6 +3,7 @@ import "./Nav.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getNumbers } from "../../actions/getActions";
+import { fireAuth } from "../../firebase/Firebase";
 
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
@@ -12,7 +13,7 @@ import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
 
 const Nav = props => {
-  console.log(props, "props navbar");
+  console.log("props direct du navbar", props);
   const barAnimation = useSpring({
     from: { transform: "translate3d(0, -10rem, 0)" },
     transform: "translate3d(0, 0, 0)"
@@ -43,6 +44,11 @@ const Nav = props => {
               <span> {props.cardProps.cardNumbers}</span>
             </Link>
             <Link to="/signup">SignUp</Link>
+            {props.currentUser && props.currentUser ? (
+              <Link>
+                <button onClick={() => fireAuth.signOut()}>Sign out</button>
+              </Link>
+            ) : null}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -61,7 +67,8 @@ const Nav = props => {
 };
 
 const mapStateToProps = state => ({
-  cardProps: state.cardState
+  cardProps: state.cardState,
+  currentUser: state.auth.currentUser
 });
 export default connect(mapStateToProps, { getNumbers })(Nav);
 
