@@ -5,54 +5,20 @@ import {
   ADD_QUANTITY,
   ADD_SHIPPING
 } from "../actions/types";
+/* const produitData = store.getState().produit.produits; */
 
-const initialState = {
+const initState = {
   produits: [
-    {
-      id: 1,
-      title: "Winter body",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    },
-    {
-      id: 2,
-      title: "Adidas",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    },
-    {
-      id: 3,
-      title: "Vans",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    },
-    {
-      id: 4,
-      title: "White",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    },
-    {
-      id: 5,
-      title: "Cropped-sho",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    },
-    {
-      id: 6,
-      title: "Blues",
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex."
-    }
+    /* produitData */
   ],
   addedItems: [],
   total: 0
 };
 
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = initState, action) => {
   //INSIDE HOME COMPONENT
   if (action.type === ADD_TO_CART) {
-    let addedItem = state.items.find(item => item.id === action.id);
+    let addedItem = state.produits.find(item => item.id === action.id);
     //check if the action id exists in the addedItems
     let existed_item = state.addedItems.find(item => action.id === item.id);
     if (existed_item) {
@@ -88,7 +54,7 @@ const cartReducer = (state = initialState, action) => {
   }
   //INSIDE CART COMPONENT
   if (action.type === ADD_QUANTITY) {
-    let addedItem = state.items.find(item => item.id === action.id);
+    let addedItem = state.produits.find(item => item.id === action.id);
     addedItem.quantity += 1;
     let newTotal = state.total + addedItem.price;
     return {
@@ -97,7 +63,7 @@ const cartReducer = (state = initialState, action) => {
     };
   }
   if (action.type === SUB_QUANTITY) {
-    let addedItem = state.items.find(item => item.id === action.id);
+    let addedItem = state.produits.find(item => item.id === action.id);
     //if the qt == 0 then it should be removed
     if (addedItem.quantity === 1) {
       let new_items = state.addedItems.filter(item => item.id !== action.id);

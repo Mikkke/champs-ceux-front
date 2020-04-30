@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 
 const CollapseMenu = props => {
-  console.log("props collapse", props);
   const { open } = useSpring({ open: props.navbarState ? 0 : 1 });
 
   if (props.navbarState === true) {

@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { fetchProduit } from "../../actions/fetchProduitAction";
+
 const Panier = props => {
-  console.log("props du panier produit :", props);
-
-  const { fetchProduit, produit } = props;
-
-  useEffect(() => {
-    fetchProduit();
-  }, [fetchProduit]);
+  console.log("props du panier :", props);
 
   return (
     <div className="panier">
@@ -19,14 +13,8 @@ const Panier = props => {
 
 const mapStateToProps = state => {
   return {
-    produit: state.produit
+    addedItems: state./* cartState. */ addedItems
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchProduit: () => dispatch(fetchProduit())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Panier);
+export default connect(mapStateToProps)(Panier);

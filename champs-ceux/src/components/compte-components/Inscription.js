@@ -25,24 +25,25 @@ const Inscription = props => {
 
   return (
     <div className="inscription-div">
-      <h2>Inscription</h2>
-      <form>
-        {/* <div className="inputBox">
+      <div className="wrap-inscription">
+        <h2>Inscription</h2>
+        <form>
+          {/* <div className="inputBox">
           <input type="text" id="pseudo" autoComplete="off" required />
           <label htmlFor="pseudo">Pseudo</label>
         </div> */}
-        <div className="inputBox">
+
           <input
             type="email"
             id="email"
             autoComplete="off"
+            placeholder="Email.."
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <label htmlFor="email">Email</label>
-        </div>
-        {/*     <div className="inputBox">
+
+          {/*     <div className="inputBox">
           <label>
             Admin:
             <input
@@ -53,7 +54,7 @@ const Inscription = props => {
             />
           </label>
         </div> */}
-        <div className="inputBox">
+
           <input
             type="password"
             id="password"
@@ -61,25 +62,24 @@ const Inscription = props => {
             required
             value={password}
             onChange={e => setPassword(e.target.value)}
+            placeholder="Mot de passe.."
           />
-          <label htmlFor="password">Mot de passe</label>
-        </div>
-        <div className="inputBox">
+
           <input
             type="password"
             id="confirmPassword"
             autoComplete="off"
             required
+            placeholder="confirmer mot de passe.."
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
           />
-          <label htmlFor="confirmPassword">Confirmer le Mot de passe</label>
-        </div>
-        <button onClick={handleSignUp}>Inscrivez-vous</button>
-      </form>
-      <p>
-        Deja un compte ? <Link to="/connexion">Connectez-vous</Link>
-      </p>
+          <button onClick={handleSignUp}>Inscrivez-vous</button>
+        </form>
+        <p>
+          Deja un compte ? <Link to="/compte">Connectez-vous</Link>
+        </p>
+      </div>
     </div>
   );
 };

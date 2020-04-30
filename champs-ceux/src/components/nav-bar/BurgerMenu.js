@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const BurgerMenu = props => {
-  console.log("props burger", props);
   return (
     <Wrapper onClick={props.handleNavbar}>
       <div className={props.navbarState ? "open" : ""}>

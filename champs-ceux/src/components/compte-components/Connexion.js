@@ -12,7 +12,7 @@ const Connexion = props => {
     fireAuth
       .signInWithEmailAndPassword(email, password)
       .then(user => {
-        console.log("user :", user.displayName);
+        console.log("user de connection:", user);
         props.history.push("/navCompte");
       })
       .catch(err => console.log("err :", err));
@@ -20,25 +20,30 @@ const Connexion = props => {
 
   return (
     <div className="connexion-div">
-      <h2>Connexion</h2>
-      <form>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label>Mot de passe</label>
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <button onClick={handleSignIn}>Connexion</button>
-      </form>
-      <p>
-        Pas encore de compte ? <Link to="/inscription">inscrivez-vous</Link>{" "}
-      </p>
+      <div className="wrap">
+        <h2>Connexion</h2>
+        <form>
+          <input
+            type="email"
+            placeholder="Email.."
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            value={password}
+            placeholder="Mot de passe.."
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+          <button onClick={handleSignIn}>Connexion</button>
+        </form>
+        <p>
+          Pas encore de compte ? <Link to="/inscription">inscrivez-vous</Link>{" "}
+        </p>
+      </div>
     </div>
   );
 };

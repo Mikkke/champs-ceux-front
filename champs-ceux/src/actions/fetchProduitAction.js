@@ -33,7 +33,7 @@ export const fetchProduit = () => {
       .get(initialUrl)
       .then(res => {
         const produitData = res.data;
-        console.log("produitData :", produitData);
+        /* console.log("produitData :", produitData); */
         dispatch(fetchProduitSucces(produitData));
       })
       .catch(err => {

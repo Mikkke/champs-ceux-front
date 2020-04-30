@@ -1,39 +1,30 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { addCard } from "../../actions/addActions";
-import Modal from "../modal/Modal";
+import { fetchProduit } from "../../actions/fetchProduitAction";
+/* import { addCard } from "../../actions/addActions"; */
+import { addToCart } from "../../actions/cartAction";
 import Axios from "axios";
+import Modal from "../modal/Modal";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
 
-const Produits = ({ addCard }) => {
-  console.log("props produit:");
-  /*   const { buttonLabel, className } = props; */
+const Produits = props => {
+  console.log("props de produit :", props);
 
-  const [produit, setProduit] = useState([]);
-  console.log("composant produit", produit);
-
-  const getProduitData = url => {
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        //const [{ nom, prix, quantite, description, photo }] = data;
-
-        setProduit(data);
-        console.log(data, "data");
-      })
-      .catch(err => console.error("vous avez une erreur", err));
-  };
+  const { fetchProduit, produitData, /* addCard, */ addToCart } = props;
 
   useEffect(() => {
-    getProduitData(initialUrl);
-  }, []);
+    fetchProduit();
+  }, [fetchProduit]);
+
+  const handleClick = id => {
+    addToCart(id);
+  };
 
   const [openModal, setOpenModal] = useState(false);
   const [produitInfos, setProduitInfos] = useState({});
   const [loading, setLoading] = useState(true);
-  console.log("produitInfos :", produitInfos);
 
   const showModal = id => {
     setOpenModal(true);
@@ -60,7 +51,10 @@ const Produits = ({ addCard }) => {
         <button className="modalBtn" onClick={closeModal}>
           Fermer
         </button>
-        <button className="modalBtn1" onClick={addCard}>
+        <button
+          className="modalBtn1"
+          onClick={() => handleClick(produitInfos.id)}
+        >
           Ajouter au panier
         </button>
       </div>
@@ -68,13 +62,18 @@ const Produits = ({ addCard }) => {
   ) : (
     <h1>Je charge</h1>
   );
+
   return (
     <div className="produit-div">
-      {produit.length === 0 ? (
-        <h1>Chargement...</h1>
+      {produitData.loading ? (
+        <div>Loading...</div>
+      ) : produitData.error ? (
+        <div>Une erreur {produitData.error} </div>
       ) : (
-        produit.map((el, index) => {
-          console.log("coucou mike !!!", `${apiBaseURL}${el.photo}`);
+        produitData &&
+        produitData.produits.map((el, index) => {
+          /* console.log("coucou mike !!!", `${apiBaseURL}${el.photo}`);
+          console.log("coucou mike !!!", `${apiBaseURL}${el.photo}`); */
           const imgSrc = !el.photo.includes("firebasestorage.googleapis")
             ? `${apiBaseURL}${el.photo}`
             : el.photo;
@@ -95,7 +94,7 @@ const Produits = ({ addCard }) => {
                     variant="contained"
                     color="primary"
                     size="sm"
-                    onClick={addCard}
+                    onClick={() => handleClick(el.id)}
                     className="addPanier"
                   >
                     Ajouter au panier
@@ -112,6 +111,26 @@ const Produits = ({ addCard }) => {
       </Modal>
     </div>
   );
+
+  /*  return (
+    <div className="panier">
+      <h1>Sur le Panier</h1>
+    </div>
+  ); */
 };
 
-export default connect(null, { addCard })(Produits);
+const mapStateToProps = state => {
+  return {
+    produitData: state.produit
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProduit: () => dispatch(fetchProduit()),
+    /* addCard: () => dispatch(addCard()), */
+    addToCart: id => dispatch(addToCart(id))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Produits);

@@ -1,8 +1,32 @@
 .navCompte{
-    background: red;
-    padding: 20px;
+    background: white;
     margin-top: 60px;
     height: calc(110vh - 10px);
-    border: 3px solid yellow;
     font-size: 1em;
+    display: flex;
+    
+aside {
+    width: 200px;
+    height: 100%;
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 40%;
+        a {
+            color: black;
+            text-decoration: none;
+            padding: 15px;
+            text-align: center;
+            background: gray;
+            margin: 7px;
+        }
+    }
+
+
+}
+}
+
+.main-compte {
+    background: red; display: flex;
 }

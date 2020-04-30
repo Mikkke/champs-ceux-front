@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false
 };
 
-export default function auth(state = initialState, action) {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHECK_TOKEN:
       return {
@@ -17,4 +17,6 @@ export default function auth(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default authReducer;

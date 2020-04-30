@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getNumbers } from "../../actions/getActions";
+/* import { getNumbers } from "../../actions/getActions"; */
 import { fireAuth } from "../../firebase/Firebase";
 
 import styled from "styled-components";
@@ -26,8 +26,36 @@ const Nav = props => {
     config: config.wobbly
   });
 
+  /* 
+  const [userSession, setUserSession] = useState(null);
+
+  const session =
+    userSession === null ? (
+      <Fragment>
+        <div>Je charger</div>
+      </Fragment>
+    ) : (
+      <div>Je ne charger pas </div>
+    );
+    
+
   useEffect(() => {
-    getNumbers();
+    let listenner = fireAuth.onAuthStateChanged(user => {
+      user ? setUserSession(user) : props.history.push("/");
+    });
+
+    return () => {
+      listenner();
+    };
+  }, []); */
+  const liensVersCompte =
+    props.currentUser && props.currentUser ? (
+      <Link to="/navCompte">COMPTE</Link>
+    ) : (
+      <Link to="/compte">COMPTE</Link>
+    );
+  useEffect(() => {
+    /* getNumbers(); */
   });
   return (
     <>
@@ -38,16 +66,16 @@ const Nav = props => {
             <Link to="/">ACCUEIL</Link>
             <Link to="/produits">PRODUITS</Link>
             <Link to="/contact">CONTACT</Link>
-            <Link to="/compte">COMPTE</Link>
+            {liensVersCompte}
             <Link to="/panier">
               Panier
-              <span> {props.cardProps.cardNumbers}</span>
+              <span> {/* {props.cardProps.cardNumbers} */}</span>
             </Link>
             <Link to="/signup">SignUp</Link>
             {props.currentUser && props.currentUser ? (
-              <Link>
-                <button onClick={() => fireAuth.signOut()}>Sign out</button>
-              </Link>
+              <div>
+                <button onClick={() => fireAuth.signOut()}>Déconnexion</button>
+              </div>
             ) : null}
           </NavLinks>
           <BurgerWrapper>
@@ -67,10 +95,11 @@ const Nav = props => {
 };
 
 const mapStateToProps = state => ({
-  cardProps: state.cardState,
+  /* cardProps: state.cardState, */
   currentUser: state.auth.currentUser
 });
-export default connect(mapStateToProps, { getNumbers })(Nav);
+
+export default connect(mapStateToProps)(Nav);
 
 const NavBar = styled(animated.nav)`
   position: fixed;

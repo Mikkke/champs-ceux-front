@@ -1,14 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const NavCompte = () => {
+const NavCompte = props => {
+  console.log("props  nav co:>> ", props);
   return (
-    <nav className="navCompte">
-      <Link to="/produitcomp">Mes produits</Link>
-      <Link to="/compte">Mon compte</Link>
-      <Link to="historique">Historique</Link>
-    </nav>
+    <div className="navCompte">
+      <aside>
+        <nav>
+          <Link to="/produitscompte">Mes produits</Link>
+          <Link to="/moncompte">Mon compte</Link>
+          <Link to="historique">Historique</Link>
+        </nav>
+      </aside>
+      <div className="main-navCompte"></div>
+    </div>
   );
 };
 
-export default NavCompte;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(NavCompte);
