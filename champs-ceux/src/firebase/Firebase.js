@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-//import firestore from "firebase/firestore";
+import "firebase/firestore";
 import "firebase/storage";
 import "firebase/auth";
 
@@ -19,5 +19,7 @@ firebase.analytics();
 
 const refStorage = firebase.storage().ref(`image_produitfileName`); //modif ici avec tidle et
 const fireAuth = firebase.auth();
+//var alovelaceDocumentRef = db.doc('users/alovelace');
+const fireStore = firebase.firestore();
 
-export { fireAuth, firebase, refStorage as default };
+export { fireAuth, firebase, fireStore, refStorage as default };

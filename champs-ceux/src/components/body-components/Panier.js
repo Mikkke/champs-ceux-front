@@ -13,7 +13,7 @@ const Panier = props => {
 
 const mapStateToProps = state => {
   return {
-    addedItems: state./* cartState. */ addedItems
+    addedItems: state.addedItems
   };
 };
 

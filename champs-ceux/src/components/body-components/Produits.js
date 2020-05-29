@@ -2,7 +2,7 @@ import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProduit } from "../../actions/fetchProduitAction";
 /* import { addCard } from "../../actions/addActions"; */
-import { addToCart } from "../../actions/cartAction";
+import { addToCart } from "../../actions/cartAction2";
 import Axios from "axios";
 import Modal from "../modal/Modal";
 
@@ -45,6 +45,16 @@ const Produits = props => {
         <h2>{produitInfos.nom}</h2>
       </div>
       <div className="modalBody">
+        <img
+          className="image"
+          width="100%"
+          src={
+            !produitInfos.photo.includes("firebasestorage.googleapis")
+              ? `${apiBaseURL}${produitInfos.photo}`
+              : produitInfos.photo
+          }
+          alt="produit"
+        />
         <h3>{produitInfos.description}</h3>
       </div>
       <div className="modalFooter">
@@ -87,9 +97,9 @@ const Produits = props => {
                   alt="produit"
                 />
                 <div className="card-body">
-                  <h1 className="card-title">{el.nom}</h1>
-                  <p>{el.prix}€</p>
-                  <p>{el.quantite} KG</p>
+                  <h1 className="card-title">Produit: {el.nom}</h1>
+                  <p>Prix: {el.prix}€</p>
+                  <p>Quantite: {el.quantite} KG</p>
                   <button
                     variant="contained"
                     color="primary"

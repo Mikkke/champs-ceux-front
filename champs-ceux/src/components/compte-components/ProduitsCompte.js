@@ -47,24 +47,23 @@ const ProduitsCompte = () => {
 
   return (
     <div className="compte-div">
-      <h1>Compte</h1>
-
-      <button>Inscription</button>
-      <button>Connexion</button>
+      <h1>Ajouter produit</h1>
 
       <div className="compte-produit-div">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Nom : </label> <input ref={register} name="nom" type="text" />
+          <label>Nom </label> <input ref={register} name="nom" type="text" />
           {errors.nom && errors.nom.message}
-          <label>Prix : </label>{" "}
+          <label>Prix </label>{" "}
           <input ref={register} name="prix" type="number" />
-          <label>Quantité : </label>{" "}
+          <label>Quantité </label>{" "}
           <input ref={register} name="quantite" type="number" />
-          <label>Photo : </label>{" "}
+          <label>Photo </label>{" "}
           <input ref={register} name="photo" type="file" />
-          <label>Description : </label>{" "}
+          <label>Description </label>{" "}
           <textarea ref={register} name="description" />
-          <input type="submit" value="ajouter a la liste" />
+          <button type="submit" value="ajouter a la liste">
+            Ajouter a la liste de produit
+          </button>
         </form>
       </div>
     </div>

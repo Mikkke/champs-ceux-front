@@ -11,9 +11,9 @@ import Panier from "./components/body-components/Panier";
 import SignUpContainer from "./containers/SignUpContainer";
 import Inscription from "./components/compte-components/Inscription";
 import Connexion from "./components/compte-components/Connexion";
-import ProduitsCompte from "./components/compte-components/ProduitsCompte";
+/* import ProduitsCompte from "./components/compte-components/ProduitsCompte";
 import Utilisateur from "./components/compte-components/UtilisateurCompte";
-import Historique from "./components/compte-components/Historique.compte";
+import Historique from "./components/compte-components/Historique.compte"; */
 import NavCompte from "./components/compte-components/NavCompte";
 import { connect } from "react-redux";
 import RouterCompte from "./components/compte-components/RouterCompte";

@@ -46,7 +46,7 @@ const Compte = () => {
   };
 
   return (
-    <div className="compte-div">
+    <div className="compte-div1">
       <h1>Compte</h1>
 
       <button>Inscription</button>

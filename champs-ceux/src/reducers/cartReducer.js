@@ -8,9 +8,6 @@ import {
 /* const produitData = store.getState().produit.produits; */
 
 const initState = {
-  produits: [
-    /* produitData */
-  ],
   addedItems: [],
   total: 0
 };

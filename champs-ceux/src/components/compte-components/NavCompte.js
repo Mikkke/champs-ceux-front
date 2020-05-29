@@ -8,8 +8,8 @@ const NavCompte = props => {
     <div className="navCompte">
       <aside>
         <nav>
-          <Link to="/produitscompte">Mes produits</Link>
-          <Link to="/moncompte">Mon compte</Link>
+          <Link to="/produitscompte">Produits</Link>
+          <Link to="/moncompte">Compte</Link>
           <Link to="historique">Historique</Link>
         </nav>
       </aside>
