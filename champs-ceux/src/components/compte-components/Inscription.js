@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { fireAuth, fireStore } from "../../firebase/Firebase";
+import { fireAuth } from "../../firebase/Firebase";
 
 const Inscription = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /* const [isAdmin, setIsAdmin] = useState(true); */
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pseudo, setPseudo] = useState("");
-  //const user = uid => fireStore.doc(`users/${uid}`);
   const handleSignUp = e => {
     e.preventDefault();
 
