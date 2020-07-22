@@ -29,8 +29,8 @@ const Inscription = ({ history }) => {
     validationSchema: schema
   });
 
-  const [password] = useState("");
-  const [confirmPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [profilType, setProfilType] = useState("");
   const [adress, setAdress] = useState("");
 
@@ -43,10 +43,10 @@ const Inscription = ({ history }) => {
           data
         );
         console.log("res.data :>> ", res.data);
-        console.log("res.data.response :>> ", res.data.response);
+        console.log("res.data.response :>> ", res.data.message);
         history.push("/navCompte");
       } catch (error) {
-        console.log("error :>> ", error);
+        console.log("error :>> ", error.response.data.message);
       }
     } else {
       alert("les mot de passe ne correspondent pas");
@@ -115,6 +115,7 @@ const Inscription = ({ history }) => {
             id="password"
             name="password"
             ref={register}
+            onChange={e => setPassword(e.target.value)}
             placeholder="Mot de passe.."
           />
           {errors.password && errors.password.message}
@@ -122,6 +123,7 @@ const Inscription = ({ history }) => {
           <input
             type="password"
             id="confirmPassword"
+            onChange={e => setConfirmPassword(e.target.value)}
             placeholder="confirmer mot de passe.."
           />
           <button type="submit">Inscrivez-vous</button>
