@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { fireAuth } from "../../firebase/Firebase";
 
-const Inscription = props => {
+const Inscription = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [pseudo, setPseudo] = useState("");
+  const [name, setName] = useState("");
+  const [profilType, setProfilType] = useState("");
+  const [adress, setAdress] = useState("");
   const handleSignUp = e => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      fireAuth
-        .createUserWithEmailAndPassword(email, password)
-        .then(user => {
-          console.log("user :", user);
-          props.history.push("/navCompte");
-        })
-        .catch(err => console.log("err :", err));
+      console.log("password :>> ", password);
     } else {
       alert("les mot de passe ne correspondent pas");
     }
@@ -31,39 +26,41 @@ const Inscription = props => {
           <input
             type="text"
             id="pseudo"
-            autoComplete="off"
-            placeholder="Pseudo..."
+            placeholder="Nom..."
             required
-            value={pseudo}
-            onChange={e => setPseudo(e.target.value)}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
 
           <input
             type="email"
             id="email"
-            autoComplete="off"
             placeholder="Email.."
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
 
-          {/*     <div className="inputBox">
-          <label>
-            Admin:
-            <input
-              name="isAdmin"
-              type="checkbox"
-              checked={isAdmin}
-              onChange={e => console.log(setIsAdmin(e.target.checked))}
-            />
-          </label>
-        </div> */}
+          <div className="inputBox">
+            <label>Je suis</label>
+            <select name="people" form="carform" className="select">
+              <option value="agriculteur">Agriculteur</option>
+              <option value="acheteur">Acheteur</option>
+            </select>
+          </div>
 
+          <input
+            type="text"
+            id="password"
+            required
+            value={adress}
+            onChange={e => setAdress(e.target.value)}
+            placeholder="Adresse.."
+            disabled
+          />
           <input
             type="password"
             id="password"
-            autoComplete="off"
             required
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -73,7 +70,6 @@ const Inscription = props => {
           <input
             type="password"
             id="confirmPassword"
-            autoComplete="off"
             required
             placeholder="confirmer mot de passe.."
             value={confirmPassword}

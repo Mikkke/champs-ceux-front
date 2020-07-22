@@ -71,7 +71,7 @@ const Nav = props => {
               Panier
               <span> {/* {props.cardProps.cardNumbers} */}</span>
             </Link>
-            <Link to="/signup">SignUp</Link>
+            {/*  <Link to="/signup">SignUp</Link> */}
             {props.currentUser && props.currentUser ? (
               <div>
                 <button onClick={() => fireAuth.signOut()}>Déconnexion</button>
