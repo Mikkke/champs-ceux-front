@@ -8,7 +8,7 @@ import Accueil from "./components/body-components/Accueil";
 import Produit from "./components/body-components/Produits";
 import Contact from "./components/body-components/Contact";
 import Panier from "./components/body-components/Panier";
-import SignUpContainer from "./containers/SignUpContainer";
+//import SignUpContainer from "./containers/SignUpContainer";
 import Inscription from "./components/compte-components/Inscription";
 import Connexion from "./components/compte-components/Connexion";
 /* import ProduitsCompte from "./components/compte-components/ProduitsCompte";
@@ -53,7 +53,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
         <Route path="/compte" component={Connexion} />
         {/* <Route path="/compte" component={Compte} /> */}
         <Route path="/panier" component={Panier} />
-        <Route path="/signup" component={SignUpContainer} />
+        {/* <Route path="/signup" component={SignUpContainer} /> */}
         <Route path="/inscription" component={Inscription} />
         {/* <Route path="/connexion" component={Connexion} /> */}
         {/* <Route path="/produitcomp" component={ProduitsCompte} />

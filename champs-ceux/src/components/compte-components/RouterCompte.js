@@ -8,7 +8,8 @@ import ProduitsCompte from "./ProduitsCompte";
 
 const RouterCompte = () => {
   return (
-    <BrowserRouter basename="indexcompte">
+    //indexcompte
+    <BrowserRouter basename="/navCompte">
       <div className="main-compte">
         <NavCompte />
         <Switch>
