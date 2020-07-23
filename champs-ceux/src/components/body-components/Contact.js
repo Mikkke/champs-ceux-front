@@ -3,6 +3,7 @@ import { FaInstagram, FaFacebookF } from "react-icons/fa";
 import axios from "axios";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const schema = yup.object().shape({
   name: yup
@@ -68,7 +69,9 @@ const Contact = () => {
 
         <div className="reseaux">
           <h1>Email</h1>
-          <p /* href="/" */ className="mail-Link">champsceux@champceux.com</p>
+          <p /* href="/" */ className="mail-Link">
+            <Link to="/">champsceux@champceux.com</Link>
+          </p>
           <h2>Retrouvez nous sur</h2>
           <div className="social">
             <a href="/" className="insta">

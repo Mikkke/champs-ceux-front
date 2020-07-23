@@ -1,6 +1,5 @@
 import React, { /* Component */ useState, useEffect } from "react";
 import "./App.css";
-import { fireAuth } from "./firebase/Firebase";
 import { setCurrentUser, clearCurrentUser } from "./actions/authAction";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Nav from "./components/nav-bar/Nav";
@@ -19,7 +18,6 @@ import { connect } from "react-redux";
 import RouterCompte from "./components/compte-components/RouterCompte";
 
 const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
-  console.log("props de APP :>> ");
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleNavbar = () => {
@@ -27,22 +25,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
     setNavbarOpen(!navbarOpen);
   };
 
-  useEffect(() => {
-    let unsubscribeFromAuth = null;
-
-    unsubscribeFromAuth = fireAuth.onAuthStateChanged(user => {
-      if (user) {
-        setCurrentUser(user);
-        //console.log("user de app:", user);
-      } else {
-        clearCurrentUser();
-      }
-    });
-
-    return () => unsubscribeFromAuth();
-  }, [currentUser, setCurrentUser, clearCurrentUser]);
-
-  console.log("this.props App :");
+  useEffect(() => {}, []);
   return (
     <BrowserRouter>
       <Nav navbarState={navbarOpen} handleNavbar={handleNavbar} />
