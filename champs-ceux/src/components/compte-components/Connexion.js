@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { setCurrentUser, clearCurrentUser } from "../../actions/authAction";
 
 const schema = yup.object().shape({
   email: yup
@@ -17,7 +19,8 @@ const schema = yup.object().shape({
 });
 
 // eslint-disable-next-line react/prop-types
-const Connexion = ({ history }) => {
+const Connexion = props => {
+  console.log("props de connexion sur le bitin :>> ", props);
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
@@ -31,7 +34,8 @@ const Connexion = ({ history }) => {
       console.log("res :>> ", res);
       console.log("res.data :>> ", res.data);
       // eslint-disable-next-line react/prop-types
-      history.push("/navCompte");
+      props.setCurrentUser(res.data);
+      props.history.push("/navCompte");
     } catch (error) {
       console.log("error.message :>> ", error.response.data.message);
     }
@@ -67,4 +71,15 @@ const Connexion = ({ history }) => {
   );
 };
 
-export default Connexion;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.currentUser
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  clearCurrentUser: () => dispatch(clearCurrentUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Connexion);

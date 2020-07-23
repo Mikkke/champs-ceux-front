@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import "./Nav.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-/* import { getNumbers } from "../../actions/getActions"; */
-import { fireAuth } from "../../firebase/Firebase";
-
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { clearCurrentUser } from "../../actions/authAction";
 
 const Nav = props => {
+  const { register, handleSubmit } = useForm();
   console.log("props direct du navbar", props);
   const barAnimation = useSpring({
     from: { transform: "translate3d(0, -10rem, 0)" },
@@ -25,6 +25,21 @@ const Nav = props => {
     delay: 800,
     config: config.wobbly
   });
+
+  const onSubmit = async data => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/profil/sign-out",
+        data
+      );
+
+      console.log("res :>> ", res);
+      console.log("res.data :>> ", res.data);
+      props.clearCurrentUser(res.data);
+    } catch (error) {
+      console.log("error.response :>> ", error.response);
+    }
+  };
 
   /* 
   const [userSession, setUserSession] = useState(null);
@@ -67,15 +82,17 @@ const Nav = props => {
             <Link to="/produits">PRODUITS</Link>
             <Link to="/contact">CONTACT</Link>
             {liensVersCompte}
-            <Link to="/panier">
-              Panier
-              <span> {/* {props.cardProps.cardNumbers} */}</span>
-            </Link>
-            {/*  <Link to="/signup">SignUp</Link> */}
+            <Link to="/panier">Panier</Link>
+
             {props.currentUser && props.currentUser ? (
-              <div>
-                <button onClick={() => fireAuth.signOut()}>Déconnexion</button>
-              </div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="submit"
+                  name="logout"
+                  value="deconnexion"
+                  ref={register}
+                />
+              </form>
             ) : null}
           </NavLinks>
           <BurgerWrapper>
@@ -99,7 +116,10 @@ const mapStateToProps = state => ({
   currentUser: state.auth.currentUser
 });
 
-export default connect(mapStateToProps)(Nav);
+const mapDispatchToProps = dispatch => ({
+  clearCurrentUser: logout => dispatch(clearCurrentUser(logout))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
 
 const NavBar = styled(animated.nav)`
   position: fixed;

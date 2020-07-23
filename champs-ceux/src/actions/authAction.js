@@ -6,6 +6,7 @@ export const setCurrentUser = user => {
     payload: user
   };
 };
-export const clearCurrentUser = () => ({
-  type: CLEAR_CURRENT_USER
+export const clearCurrentUser = logout => ({
+  type: CLEAR_CURRENT_USER,
+  payload: logout
 });
