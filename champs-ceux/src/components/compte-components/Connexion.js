@@ -4,7 +4,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { setCurrentUser, clearCurrentUser } from "../../actions/authAction";
+import { setCurrentUser } from "../../actions/authAction";
 
 const schema = yup.object().shape({
   email: yup
@@ -78,8 +78,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
-  clearCurrentUser: () => dispatch(clearCurrentUser())
+  setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connexion);
