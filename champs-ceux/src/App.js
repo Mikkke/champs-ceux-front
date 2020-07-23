@@ -1,7 +1,7 @@
 import React, { /* Component */ useState, useEffect } from "react";
 import "./App.css";
 import { fireAuth } from "./firebase/Firebase";
-import { setCurrentUser, clearCurrentUser } from "./actions/auth2Action";
+import { setCurrentUser, clearCurrentUser } from "./actions/authAction";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Nav from "./components/nav-bar/Nav";
 import Accueil from "./components/body-components/Accueil";

@@ -1,4 +1,4 @@
-import * as types from "../constants/index";
+/* import * as types from "../constants/index";
 
 const initialState = {
   isAuth: false,
@@ -19,4 +19,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default authReducer; */

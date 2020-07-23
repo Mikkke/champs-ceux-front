@@ -16,6 +16,7 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+// eslint-disable-next-line react/prop-types
 const Connexion = ({ history }) => {
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
@@ -29,6 +30,7 @@ const Connexion = ({ history }) => {
       );
       console.log("res :>> ", res);
       console.log("res.data :>> ", res.data);
+      // eslint-disable-next-line react/prop-types
       history.push("/navCompte");
     } catch (error) {
       console.log("error.message :>> ", error.response.data.message);

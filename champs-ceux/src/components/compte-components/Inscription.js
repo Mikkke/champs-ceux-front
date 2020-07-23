@@ -24,6 +24,7 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+// eslint-disable-next-line react/prop-types
 const Inscription = ({ history }) => {
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
@@ -44,6 +45,7 @@ const Inscription = ({ history }) => {
         );
         console.log("res.data :>> ", res.data);
         console.log("res.data.response :>> ", res.data.message);
+        // eslint-disable-next-line react/prop-types
         history.push("/navCompte");
       } catch (error) {
         console.log("error :>> ", error.response.data.message);
