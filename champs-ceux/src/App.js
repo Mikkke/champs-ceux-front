@@ -1,14 +1,13 @@
 import React, { /* Component */ useState, useEffect } from "react";
 import "./App.css";
-import { fireAuth } from "./firebase/Firebase";
-import { setCurrentUser, clearCurrentUser } from "./actions/auth2Action";
+import { setCurrentUser, clearCurrentUser } from "./actions/authAction";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Nav from "./components/nav-bar/Nav";
 import Accueil from "./components/body-components/Accueil";
 import Produit from "./components/body-components/Produits";
 import Contact from "./components/body-components/Contact";
 import Panier from "./components/body-components/Panier";
-import SignUpContainer from "./containers/SignUpContainer";
+//import SignUpContainer from "./containers/SignUpContainer";
 import Inscription from "./components/compte-components/Inscription";
 import Connexion from "./components/compte-components/Connexion";
 /* import ProduitsCompte from "./components/compte-components/ProduitsCompte";
@@ -19,7 +18,6 @@ import { connect } from "react-redux";
 import RouterCompte from "./components/compte-components/RouterCompte";
 
 const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
-  console.log("props de APP :>> ");
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleNavbar = () => {
@@ -27,22 +25,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
     setNavbarOpen(!navbarOpen);
   };
 
-  useEffect(() => {
-    let unsubscribeFromAuth = null;
-
-    unsubscribeFromAuth = fireAuth.onAuthStateChanged(user => {
-      if (user) {
-        setCurrentUser(user);
-        //console.log("user de app:", user);
-      } else {
-        clearCurrentUser();
-      }
-    });
-
-    return () => unsubscribeFromAuth();
-  }, [currentUser, setCurrentUser, clearCurrentUser]);
-
-  console.log("this.props App :");
+  useEffect(() => {}, []);
   return (
     <BrowserRouter>
       <Nav navbarState={navbarOpen} handleNavbar={handleNavbar} />
@@ -53,7 +36,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
         <Route path="/compte" component={Connexion} />
         {/* <Route path="/compte" component={Compte} /> */}
         <Route path="/panier" component={Panier} />
-        <Route path="/signup" component={SignUpContainer} />
+        {/* <Route path="/signup" component={SignUpContainer} /> */}
         <Route path="/inscription" component={Inscription} />
         {/* <Route path="/connexion" component={Connexion} /> */}
         {/* <Route path="/produitcomp" component={ProduitsCompte} />

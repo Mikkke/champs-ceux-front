@@ -1,4 +1,8 @@
 //Produit action
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const CLEAR_CURRENT_USER = "CLEAR_CURRENT_USER";
+
 export const FETCH_PRODUIT_REQUEST = "FETCH_PRODUIT_REQUEST";
 export const FETCH_PRODUIT_SUCCES = "FETCH_PRODUIT_SUCCES";
 export const FETCH_PRODUIT_FAILURE = "FETCH_PRODUIT_FAILURE";
@@ -15,20 +19,4 @@ export const ADD_QUANTITY = "ADD_QUANTITY";
 export const ADD_SHIPPING = "ADD_SHIPPING";
 
 //
-export const CHECK_TOKEN = "CHECK_TOKEN";
-
-//Sign Up
-export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-export const SIGNUP_ERROR = "SIGNUP_ERROR";
-//Sign In
-export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
-export const SIGNIN_ERROR = "SIGNIN_ERROR";
-//Sign out
-export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
-export const SIGNOUT_ERROR = "SIGNOUT_ERROR";
-
 //
-export const authTypes = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-  CLEAR_CURRENT_USER: "CLEAR_CURRENT_USER"
-};

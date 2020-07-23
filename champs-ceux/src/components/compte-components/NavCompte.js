@@ -13,7 +13,6 @@ const NavCompte = props => {
           <Link to="historique">Historique</Link>
         </nav>
       </aside>
-      <div className="main-navCompte"></div>
     </div>
   );
 };

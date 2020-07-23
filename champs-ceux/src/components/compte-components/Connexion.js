@@ -1,44 +1,63 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { fireAuth } from "../../firebase/Firebase";
+import axios from "axios";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
 
-const Connexion = props => {
-  console.log("props connexion :", props);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSignIn = e => {
-    e.preventDefault();
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email()
+    .max(30, "ne doit pas depasser 30 caracteres")
+    .required("ce champs est requis"),
+  password: yup
+    .string()
+    .min(6, "doit contenir plus de 6 caracterers")
+    .required("ce champs est requis")
+});
 
-    fireAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log("user de connection:", user);
-        props.history.push("/navCompte");
-      })
-      .catch(err => console.log("err :", err));
+// eslint-disable-next-line react/prop-types
+const Connexion = ({ history }) => {
+  const { register, handleSubmit, errors } = useForm({
+    validationSchema: schema
+  });
+
+  const onSubmit = async data => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/profil/login",
+        data
+      );
+      console.log("res :>> ", res);
+      console.log("res.data :>> ", res.data);
+      // eslint-disable-next-line react/prop-types
+      history.push("/navCompte");
+    } catch (error) {
+      console.log("error.message :>> ", error.response.data.message);
+    }
   };
 
   return (
     <div className="connexion-div">
       <div className="wrap">
         <h2>Connexion</h2>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="email"
             placeholder="Email.."
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
+            name="email"
+            ref={register}
           />
+          {errors.email && errors.email.message}
 
           <input
+            name="password"
             type="password"
-            value={password}
             placeholder="Mot de passe.."
-            onChange={e => setPassword(e.target.value)}
-            required
+            ref={register}
           />
-          <button onClick={handleSignIn}>Connexion</button>
+          {errors.password && errors.password.message}
+          <button type="submit">Connexion</button>
         </form>
         <p>
           Pas encore de compte ? <Link to="/inscription">inscrivez-vous</Link>{" "}

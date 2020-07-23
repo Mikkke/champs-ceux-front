@@ -18,9 +18,7 @@ const providers = {
     .required("ce champs est requis")
 });*/
 
-const SignUp = props => {
-  console.log("props signup props du signUp:", props);
-  const { user, signInWithGoogle, signOut } = props;
+const SignUp = ({ user, signInWithGoogle, signOut, checkToken }) => {
   async function callApi() {
     await axios.get("http://localhost:8000/api/auth");
   }
@@ -35,7 +33,7 @@ const SignUp = props => {
         })
         .catch(err => console.log(err));
     }
-    props.checkToken();
+    checkToken();
   }, [user]);
   /* React.useEffect(() => {
     checkToken();
