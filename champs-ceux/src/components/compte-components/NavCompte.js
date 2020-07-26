@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const NavCompte = props => {
-  console.log("props  nav co:>> ", props);
+  console.log("props de navcompte :>> ", props);
+  //console.log("props  nav co:>> ", props);
+
+  const isAuth = localStorage.getItem("auth");
+  console.log("isAuth de produit :>> ", isAuth);
+  if (!isAuth) {
+    return <Redirect to="/inscription" />;
+  }
+
   return (
     <div className="navCompte">
       <aside>

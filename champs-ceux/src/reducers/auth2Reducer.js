@@ -1,7 +1,8 @@
 import { SET_CURRENT_USER, CLEAR_CURRENT_USER } from "../actions/types";
 
 const initialState = {
-  currentUser: null
+  currentUser: null,
+  isAuth: false
 };
 
 const auth2Reducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const auth2Reducer = (state = initialState, action) => {
     case SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: action.payload
+        currentUser: action.payload,
+        isAuth: true
       };
 
     case CLEAR_CURRENT_USER:
