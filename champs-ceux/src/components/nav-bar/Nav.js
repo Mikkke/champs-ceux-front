@@ -13,7 +13,7 @@ import { clearCurrentUser } from "../../actions/authAction";
 
 const Nav = props => {
   const { register, handleSubmit } = useForm();
-  console.log("props direct du navbar", props);
+  //console.log("props direct du navbar", props);
   const barAnimation = useSpring({
     from: { transform: "translate3d(0, -10rem, 0)" },
     transform: "translate3d(0, 0, 0)"
@@ -36,6 +36,7 @@ const Nav = props => {
       console.log("res :>> ", res);
       console.log("res.data :>> ", res.data);
       props.clearCurrentUser(res.data);
+      localStorage.clear();
     } catch (error) {
       console.log("error.response :>> ", error.response);
     }

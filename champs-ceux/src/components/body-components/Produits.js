@@ -73,6 +73,8 @@ const Produits = props => {
     <h1>Je charge</h1>
   );
 
+  //code pour le redirect
+
   return (
     <div className="produit-div">
       {produitData.loading ? (

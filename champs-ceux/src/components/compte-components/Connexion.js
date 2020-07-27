@@ -4,7 +4,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { setCurrentUser, clearCurrentUser } from "../../actions/authAction";
+import { setCurrentUser } from "../../actions/authAction";
 
 const schema = yup.object().shape({
   email: yup
@@ -32,14 +32,22 @@ const Connexion = props => {
         data
       );
       console.log("res :>> ", res);
-      console.log("res.data :>> ", res.data);
+      //const auth = res.data.isAuthenticated;
+      localStorage.setItem("auth", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
       props.setCurrentUser(res.data);
       props.history.push("/navCompte");
+      //localStorage.setItem("user", JSON.stringify(res.data));
+      // eslint-disable-next-line react/prop-types
     } catch (error) {
-      console.log("error.message :>> ", error.response.data.message);
+      console.log("error.message :>> ", error.response);
     }
   };
+
+  /* const friends = ["jhon", "peter", "fred"];
+  localStorage.setItem("friends", JSON.stringify(friends));
+  const values = JSON.parse(localStorage.getItem("friends"));
+  console.log("values[1] :>> ", values[1]); */
 
   return (
     <div className="connexion-div">
@@ -78,8 +86,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
-  clearCurrentUser: () => dispatch(clearCurrentUser())
+  setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connexion);

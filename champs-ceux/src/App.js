@@ -25,7 +25,29 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
     setNavbarOpen(!navbarOpen);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    /*  unsubscribeFromAuth = fireAuth.onAuthStateChanged(user => {
+      if (user) {
+        setCurrentUser(user);
+        console.log("user :", user);
+      } else {
+        clearCurrentUser();
+      }
+      
+    }); */
+    const loggedInUser = localStorage.getItem("auth");
+    console.log("loggedInUser :>> ", loggedInUser);
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setCurrentUser(foundUser);
+      console.log("foundUser :>> ", foundUser);
+      console.log("yesss");
+    }
+    /*if (loggedInUser) {
+      props.setCurrentUser(loggedInUser);
+    } */
+    //return () => unsubscribeFromAuth();
+  }, [setCurrentUser]);
   return (
     <BrowserRouter>
       <Nav navbarState={navbarOpen} handleNavbar={handleNavbar} />
