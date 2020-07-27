@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,7 @@ const schema = yup.object().shape({
 
 // eslint-disable-next-line react/prop-types
 const Connexion = props => {
+  const [error, setError] = useState("");
   console.log("props de connexion sur le bitin :>> ", props);
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
@@ -40,7 +41,8 @@ const Connexion = props => {
       //localStorage.setItem("user", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
     } catch (error) {
-      console.log("error.message :>> ", error.response);
+      console.log("error.message :>> ");
+      setError(error.response.data.message);
     }
   };
 
@@ -51,6 +53,7 @@ const Connexion = props => {
 
   return (
     <div className="connexion-div">
+      {error}
       <div className="wrap">
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -89,4 +92,6 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connexion);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Connexion)
+);

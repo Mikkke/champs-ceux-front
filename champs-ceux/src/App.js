@@ -36,12 +36,12 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
       
     }); */
     const loggedInUser = localStorage.getItem("auth");
-    console.log("loggedInUser :>> ", loggedInUser);
+    // console.log("loggedInUser :>> ", loggedInUser);
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setCurrentUser(foundUser);
-      console.log("foundUser :>> ", foundUser);
-      console.log("yesss");
+      //console.log("foundUser :>> ", foundUser);
+      //console.log("yesss");
     }
     /*if (loggedInUser) {
       props.setCurrentUser(loggedInUser);

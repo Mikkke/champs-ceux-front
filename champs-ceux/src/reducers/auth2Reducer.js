@@ -17,7 +17,8 @@ const auth2Reducer = (state = initialState, action) => {
     case CLEAR_CURRENT_USER:
       return {
         ...state,
-        currentUser: null
+        currentUser: null,
+        isAuth: false
       };
 
     default:

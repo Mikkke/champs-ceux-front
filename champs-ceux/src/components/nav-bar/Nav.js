@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
@@ -12,6 +12,9 @@ import axios from "axios";
 import { clearCurrentUser } from "../../actions/authAction";
 
 const Nav = props => {
+  const currentName = props.currentUser ? (
+    <h4>Bonjour {props.currentUser.name}</h4>
+  ) : null;
   const { register, handleSubmit } = useForm();
   //console.log("props direct du navbar", props);
   const barAnimation = useSpring({
@@ -78,6 +81,7 @@ const Nav = props => {
       <NavBar style={barAnimation}>
         <FlexContainer>
           <Logo />
+          {currentName}
           <NavLinks style={linkAnimation}>
             <Link to="/">ACCUEIL</Link>
             <Link to="/produits">PRODUITS</Link>
@@ -86,7 +90,10 @@ const Nav = props => {
             <Link to="/panier">Panier</Link>
 
             {props.currentUser && props.currentUser ? (
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form
+                style={{ display: "inline" }}
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <input
                   type="submit"
                   name="logout"
@@ -120,7 +127,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   clearCurrentUser: logout => dispatch(clearCurrentUser(logout))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));
 
 const NavBar = styled(animated.nav)`
   position: fixed;
