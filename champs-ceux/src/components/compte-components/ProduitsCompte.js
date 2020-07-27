@@ -71,18 +71,3 @@ const ProduitsCompte = () => {
 };
 
 export default ProduitsCompte;
-
-/* const ProduitsCompte = () => {
-  return (
-    <div>
-      <h1>Sur les produits</h1>
-      <h1>Sur les produits</h1>
-      <h1>Sur les produits</h1>
-      <h1>Sur les produits</h1>
-      <h1>Sur les produits</h1>
-      <h1>Sur les produits</h1>
-    </div>
-  );
-};
-
-export default ProduitsCompte; */

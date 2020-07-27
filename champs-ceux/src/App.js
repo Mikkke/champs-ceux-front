@@ -47,7 +47,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
       props.setCurrentUser(loggedInUser);
     } */
     //return () => unsubscribeFromAuth();
-  }, []);
+  }, [setCurrentUser]);
   return (
     <BrowserRouter>
       <Nav navbarState={navbarOpen} handleNavbar={handleNavbar} />

@@ -12,6 +12,9 @@ const NavCompte = props => {
   if (!isAuth) {
     return <Redirect to="/inscription" />;
   }
+  const displayName = props.currentUser && (
+    <h2>bonjour {props.currentUser.name}</h2>
+  );
 
   return (
     <div className="navCompte">
@@ -22,6 +25,7 @@ const NavCompte = props => {
           <Link to="historique">Historique</Link>
         </nav>
       </aside>
+      {displayName}
     </div>
   );
 };

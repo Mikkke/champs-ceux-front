@@ -10,7 +10,6 @@ import CollapseMenu from "./CollapseMenu";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { clearCurrentUser } from "../../actions/authAction";
-import { Redirect } from "react-router-dom";
 
 const Nav = props => {
   const { register, handleSubmit } = useForm();

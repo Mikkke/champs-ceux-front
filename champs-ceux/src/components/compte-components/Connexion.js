@@ -32,7 +32,7 @@ const Connexion = props => {
         data
       );
       console.log("res :>> ", res);
-      const auth = res.data.isAuthenticated;
+      //const auth = res.data.isAuthenticated;
       localStorage.setItem("auth", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
       props.setCurrentUser(res.data);
