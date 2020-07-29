@@ -37,11 +37,25 @@ const NavCompte = props => {
     <h2>bonjour {props.currentUser.name}</h2>
   );
 
+  const vendeur = () => {
+    if (props.currentUser) {
+      if (props.currentUser.sellerId) {
+        console.log("je vend");
+        return <Link to="/produitscompte">Produit</Link>;
+      }
+      if (props.currentUser.buyerId) {
+        console.log("j'achete");
+
+        return <Link to="/achat">Mes achats</Link>;
+      }
+      console.log("props.currentUser.id :>> ");
+    }
+  };
   return (
     <div className="navCompte">
       <aside>
         <nav>
-          <Link to="/produitscompte">Produits</Link>
+          {vendeur()}
           <Link to="/moncompte">Compte</Link>
           <Link to="historique">Historique</Link>
         </nav>

@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 const schema = yup.object().shape({
-  nom: yup
+  name: yup
     .string()
     .max(30, "le nom doit comporter 30 caracteres max")
     .required("ce champs est requis")
@@ -17,16 +17,15 @@ const schema = yup.object().shape({
 
 const ProduitsCompte = props => {
   console.log("props du produit compte :>> ", props);
-  const currentId = props.currentUser ? (
-    <div>Bonjour {props.currentUser.sellerId}</div>
-  ) : null;
+  const currentId = props.currentUser ? `${props.currentUser.sellerId}` : null;
 
   console.log("currentUser du produit compte :>> ");
 
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
-
+  const [userId, setUserId] = useState(currentId);
+  console.log("userId :>> qui teste le current", userId);
   const onSubmit = async data => {
     console.log(data.photo[0], "data");
     const refStorage = firebase.storage().ref("image" + data.photo[0].name);
@@ -45,7 +44,8 @@ const ProduitsCompte = props => {
             "http://localhost:8080/api/produits",
             data
           );
-          console.log(res.data);
+          console.log("res :>> ", res);
+          console.log("data ici bas", res.data);
         } catch (error) {
           console.error(error);
         }
@@ -53,6 +53,8 @@ const ProduitsCompte = props => {
       }
     );
   };
+
+  console.log("currentId :>> ", currentId);
   const isAuth = localStorage.getItem("auth");
   //console.log("isAuth de produit :>> ", isAuth);
   if (!isAuth) {
@@ -62,19 +64,33 @@ const ProduitsCompte = props => {
   return (
     <div className="compte-div">
       <h1>Ajouter produit</h1>
-      {currentId}
+      {/* {currentId} */}
       <div className="compte-produit-div">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Nom </label> <input ref={register} name="nom" type="text" />
+          <label>Nom </label> <input ref={register} name="name" type="text" />
           {errors.nom && errors.nom.message}
           <label>Prix </label>
-          <input ref={register} name="prix" type="number" />
+          <input ref={register} name="price" type="number" />
           <label>Quantité </label>
-          <input ref={register} name="quantite" type="number" />
+          <input ref={register} name="quantity" type="number" />
+          <label>type </label>
+          <select name="type" form="carform" className="select" ref={register}>
+            <option>Fruit</option>
+            <option>legume</option>
+            <option>produit laitier</option>
+            <option>viande</option>
+          </select>
           <label>Photo </label>
           <input ref={register} name="photo" type="file" />
           <label>Description </label>
           <textarea ref={register} name="description" />
+          <label>userId </label>
+          <input
+            ref={register}
+            name="sellerId"
+            type="text"
+            defaultValue={currentId}
+          />
           <button type="submit" value="ajouter a la liste">
             Ajouter a la liste de produit
           </button>
