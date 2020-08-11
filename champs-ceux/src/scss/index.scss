@@ -54,8 +54,8 @@ body {
   padding-top: 90px;
   background: rgb(248, 246, 246);
   .my-card{
-    display: inline-block;
-    width: 205px;
+    display: flex;
+    width: 12rem;
     min-height: 300px;
     /* padding: 15px; */
     margin: 20px;
@@ -74,17 +74,19 @@ body {
         height: 100%;
         img{
           width: 100%;
-          height: auto;
+          height: 10rem;
           border-radius: 8px 8px 0 0;
         }
         h1 {
-          font-size: 15px;
+          font-size: 1.2rem;
         }
         button {
           margin: 5px;
           height: 30px;
           border-radius: 5px;
           outline: none;
+          border: 1px solid black;
+          background: white;
           cursor: pointer;
           &:hover {
             background: rgb(211, 137, 19);
@@ -159,7 +161,7 @@ body {
       a {
         color: white;
         text-decoration: none;
-        font-size: 30px;
+        font-size: 1.2em;
       }
       .social {
         display: flex;
@@ -359,16 +361,6 @@ body {
   }
  }
 }
-
-
-.panier {
-  margin-top: 90px;
-}
-
-.sign-up {
-  margin-top: 90px;
-}
-
 }
 
 
@@ -479,7 +471,7 @@ body {
   }
 
   .modalHeader {
-    background-color: var(--dark-red-color);
+    background-color: black/* var(--dark-red-color) */;
     padding: 15px;
     color: var(--white-color);
     border-top-left-radius: 5px;
@@ -495,6 +487,13 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    img {
+      width: 70%;
+    }
+    .modelBody--container  {
+      padding: 2rem;
+    }
+    
   }
 
   .modalFooter {

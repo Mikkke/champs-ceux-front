@@ -10,17 +10,17 @@ import Achat from "./Achat";
 const RouterCompte = () => {
   return (
     //indexcompte
-    <BrowserRouter /* basename="/navCompte" */>
-      <div className="main-compte">
-        <NavCompte />
-        <Switch>
-          <Route path="/produitscompte" component={ProduitsCompte} />
-          <Route path="/moncompte" component={Utilisateur} />
-          <Route path="/historique" component={Historique} />
-          <Route path="/achat" component={Achat} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    // <BrowserRouter /* basename="/navCompte" */>
+    <div className="main-compte">
+      <NavCompte />
+      <Switch>
+        <Route path="/produitscompte" component={ProduitsCompte} />
+        <Route path="/moncompte" component={Utilisateur} />
+        <Route path="/historique" component={Historique} />
+        <Route path="/achat" component={Achat} />
+      </Switch>
+    </div>
+    // </BrowserRouter>
   );
 };
 
