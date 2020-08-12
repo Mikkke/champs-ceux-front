@@ -1,8 +1,6 @@
 import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProduit } from "../../actions/fetchProduitAction";
-/* import { addCard } from "../../actions/addActions"; */
-import { addToCart } from "../../actions/cartAction2";
 import Axios from "axios";
 import Modal from "../modal/Modal";
 
@@ -12,15 +10,11 @@ const initialUrl = `${apiBaseURL}/api/produits`;
 const Produits = props => {
   console.log("props de produit :", props);
 
-  const { fetchProduit, produitData, /* addCard, */ addToCart } = props;
+  const { fetchProduit, produitData } = props;
 
   useEffect(() => {
     fetchProduit();
   }, [fetchProduit]);
-
-  const handleClick = id => {
-    addToCart(id);
-  };
 
   const [openModal, setOpenModal] = useState(false);
   const [produitInfos, setProduitInfos] = useState({});
@@ -42,12 +36,11 @@ const Produits = props => {
   const resultInModal = !loading ? (
     <Fragment>
       <div className="modalHeader">
-        <h2>{produitInfos.nom}</h2>
+        <h2>{produitInfos.name}</h2>
       </div>
       <div className="modalBody">
         <img
           className="image"
-          width="100%"
           src={
             !produitInfos.photo.includes("firebasestorage.googleapis")
               ? `${apiBaseURL}${produitInfos.photo}`
@@ -55,17 +48,15 @@ const Produits = props => {
           }
           alt="produit"
         />
-        <h3>{produitInfos.description}</h3>
+        <div className="modelBody--container">
+          <p>Prix {produitInfos.price}</p>
+          <h3>Quantité {produitInfos.quantity}</h3>
+          <h3> Description {produitInfos.description}</h3>
+        </div>
       </div>
       <div className="modalFooter">
         <button className="modalBtn" onClick={closeModal}>
           Fermer
-        </button>
-        <button
-          className="modalBtn1"
-          onClick={() => handleClick(produitInfos.id)}
-        >
-          Ajouter au panier
         </button>
       </div>
     </Fragment>
@@ -99,18 +90,10 @@ const Produits = props => {
                   alt="produit"
                 />
                 <div className="card-body">
-                  <h1 className="card-title">Produit: {el.nom}</h1>
-                  <p>Prix: {el.prix}€</p>
-                  <p>Quantite: {el.quantite} KG</p>
-                  <button
-                    variant="contained"
-                    color="primary"
-                    size="sm"
-                    onClick={() => handleClick(el.id)}
-                    className="addPanier"
-                  >
-                    Ajouter au panier
-                  </button>
+                  <h1 className="card-title">Produit: {el.name}</h1>
+                  <p>Prix: {el.price}€</p>
+                  <p>Quantite: {el.quantity} KG</p>
+                  <p>Type: {el.type}</p>
                   <button onClick={() => showModal(el.id)}>voir produit</button>
                 </div>
               </div>
@@ -139,9 +122,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProduit: () => dispatch(fetchProduit()),
-    /* addCard: () => dispatch(addCard()), */
-    addToCart: id => dispatch(addToCart(id))
+    fetchProduit: () => dispatch(fetchProduit())
   };
 };
 

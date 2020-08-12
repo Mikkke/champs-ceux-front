@@ -87,9 +87,7 @@ const Nav = props => {
             <Link to="/produits">PRODUITS</Link>
             <Link to="/contact">CONTACT</Link>
             {liensVersCompte}
-            <Link to="/panier">Panier</Link>
-
-            {props.currentUser && props.currentUser ? (
+            {/* {props.currentUser && props.currentUser ? (
               <form
                 style={{ display: "inline" }}
                 onSubmit={handleSubmit(onSubmit)}
@@ -101,7 +99,7 @@ const Nav = props => {
                   ref={register}
                 />
               </form>
-            ) : null}
+            ) : null} */}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu

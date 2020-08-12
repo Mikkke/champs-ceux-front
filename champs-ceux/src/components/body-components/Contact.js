@@ -27,7 +27,10 @@ const Contact = () => {
   const onSubmit = async data => {
     console.log("data :", data);
     try {
-      const res = await axios.post("http://localhost:8080/send-message", data);
+      const res = await axios.post(
+        "http://localhost:8080/api/send-message",
+        data
+      );
       console.log(res.data);
     } catch (error) {
       console.log(error);
@@ -45,16 +48,6 @@ const Contact = () => {
           <label>Mail</label>
           <input type="email" className="mail" ref={register} name="mail" />
           {errors.mail && errors.mail.message}
-          <label>Je suis</label>
-          <select
-            name="people"
-            form="carform"
-            className="select"
-            ref={register}
-          >
-            <option value="agriculteur">Agriculteur</option>
-            <option value="acheteur">Acheteur</option>
-          </select>
           <label>Message</label>
           <textarea
             className="textarea"

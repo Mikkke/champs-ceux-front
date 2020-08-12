@@ -117,6 +117,36 @@
 
         }
     }
+
+    .compte-historique {
+        border: 1px solid black;
+        margin-top: 60px;
+        width: 100%;
+        overflow: hidden;
+        h3 {
+            text-align: center;
+        }
+        .compte-historique--container {
+            border: 1px solid red;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            .history-card {
+                padding: 2rem;
+            }
+
+        }
+    }
+
+    .utilisateur-div {
+        text-align: center;
+        margin-top: 60px;
+        width: 100%;
+        h3 {
+            text-align: center;
+        }
+    }
 }
 
 

@@ -21,6 +21,15 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .min(6, "doit contenir plus de 6 caracter")
+    .required("ce champs est requis"),
+  city: yup
+    .string()
+    .max(5, "code non valide")
+    .required("ce champs est requis"),
+  phoneNumber: yup
+    .string()
+    .max(10, "maximum 10 caracteres")
+    .min(10, "minimum 10 caracteres")
     .required("ce champs est requis")
 });
 
@@ -106,11 +115,31 @@ const Inscription = ({ history }) => {
               onChange={e => setProfilType(e.target.value)}
               ref={register}
             >
-              <option value="buyer">Acheteur</option>
               <option value="seller">Agriculteur</option>
             </select>
           </div>
           {addressInput}
+          <input
+            name="city"
+            type="text"
+            ref={register}
+            placeholder="ville"
+            required
+          />
+          <input
+            name="postalCode"
+            type="text"
+            ref={register}
+            placeholder="code postal"
+            required
+          />
+          <input
+            name="phoneNumber"
+            type="text"
+            ref={register}
+            placeholder="telephone"
+            required
+          />
 
           <input
             type="password"

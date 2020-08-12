@@ -84,13 +84,13 @@ const ProduitsCompte = props => {
           <input ref={register} name="photo" type="file" />
           <label>Description </label>
           <textarea ref={register} name="description" />
-          <label>userId </label>
+          {/* <label>userId </label>
           <input
             ref={register}
             name="sellerId"
             type="text"
             defaultValue={currentId}
-          />
+          /> */}
           <button type="submit" value="ajouter a la liste">
             Ajouter a la liste de produit
           </button>

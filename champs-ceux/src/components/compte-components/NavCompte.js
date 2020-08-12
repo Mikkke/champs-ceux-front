@@ -33,9 +33,9 @@ const NavCompte = props => {
     return <Redirect to="/compte" />;
   }
 
-  const displayName = props.currentUser && (
+  /* const displayName = props.currentUser && (
     <h2>bonjour {props.currentUser.name}</h2>
-  );
+  ); */
 
   const vendeur = () => {
     if (props.currentUser) {
@@ -51,6 +51,7 @@ const NavCompte = props => {
       console.log("props.currentUser.id :>> ");
     }
   };
+
   return (
     <div className="navCompte">
       <aside>
@@ -70,7 +71,7 @@ const NavCompte = props => {
           </form>
         ) : null}
       </aside>
-      {displayName}
+      {/* {displayName} */}
     </div>
   );
 };
