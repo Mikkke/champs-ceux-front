@@ -25,6 +25,11 @@ const schema = yup.object().shape({
   city: yup
     .string()
     .max(5, "code non valide")
+    .required("ce champs est requis"),
+  phoneNumber: yup
+    .string()
+    .max(10, "maximum 10 caracteres")
+    .min(10, "minimum 10 caracteres")
     .required("ce champs est requis")
 });
 
@@ -114,11 +119,27 @@ const Inscription = ({ history }) => {
             </select>
           </div>
           {addressInput}
-
-          <label>Ville</label>
-          <input name="city" type="text" ref={register} required />
-          <label>Code postal</label>
-          <input name="postalCode" type="text" ref={register} required />
+          <input
+            name="city"
+            type="text"
+            ref={register}
+            placeholder="ville"
+            required
+          />
+          <input
+            name="postalCode"
+            type="text"
+            ref={register}
+            placeholder="code postal"
+            required
+          />
+          <input
+            name="phoneNumber"
+            type="text"
+            ref={register}
+            placeholder="telephone"
+            required
+          />
 
           <input
             type="password"
