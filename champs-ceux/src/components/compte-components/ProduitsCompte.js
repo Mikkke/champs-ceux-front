@@ -67,12 +67,15 @@ const ProduitsCompte = props => {
       {/* {currentId} */}
       <div className="compte-produit-div">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Nom </label> <input ref={register} name="name" type="text" />
+          <input ref={register} name="name" type="text" placeholder="Nom" />
           {errors.nom && errors.nom.message}
-          <label>Prix </label>
-          <input ref={register} name="price" type="number" />
-          <label>Quantité </label>
-          <input ref={register} name="quantity" type="number" />
+          <input ref={register} name="price" type="number" placeholder="prix" />
+          <input
+            ref={register}
+            name="quantity"
+            type="number"
+            placeholder="quantité"
+          />
           <label>type </label>
           <select name="type" form="carform" className="select" ref={register}>
             <option>Fruit</option>
@@ -80,10 +83,13 @@ const ProduitsCompte = props => {
             <option>produit laitier</option>
             <option>viande</option>
           </select>
-          <label>Photo </label>
-          <input ref={register} name="photo" type="file" />
-          <label>Description </label>
-          <textarea ref={register} name="description" />
+          <label>Photo</label>
+          <input ref={register} name="photo" type="file" placeholder="photo" />
+          <textarea
+            ref={register}
+            name="description"
+            placeholder="description"
+          />
           {/* <label>userId </label>
           <input
             ref={register}
@@ -92,7 +98,7 @@ const ProduitsCompte = props => {
             defaultValue={currentId}
           /> */}
           <button type="submit" value="ajouter a la liste">
-            Ajouter a la liste de produit
+            Ajouter produit
           </button>
         </form>
       </div>

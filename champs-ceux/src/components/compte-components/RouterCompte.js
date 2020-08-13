@@ -14,7 +14,7 @@ const RouterCompte = () => {
     <div className="main-compte">
       <NavCompte />
       <Switch>
-        <Route path="/produitscompte" component={ProduitsCompte} />
+        <Route exact path="/produitscompte" component={ProduitsCompte} />
         <Route path="/moncompte" component={Utilisateur} />
         <Route path="/historique" component={Historique} />
         <Route path="/achat" component={Achat} />

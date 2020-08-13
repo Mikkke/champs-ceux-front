@@ -8,10 +8,11 @@ const Utilisateur = ({ currentUser }) => {
   //console.log("isAuth de produit :>> ", isAuth);
   const currentDescription = currentUser ? (
     <div>
-      <h1> Nom: {currentUser.name}</h1>
-      <h1> Mail: {currentUser.email}</h1>
-      <h1> Ville: {currentUser.city}</h1>
-      <h1> Code postal: {currentUser.postalCode}</h1>
+      <h3> Nom: {currentUser.name}</h3>
+      <h3> Mail: {currentUser.email}</h3>
+      <h3> Ville: {currentUser.city}</h3>
+      <h3> Code postal: {currentUser.postalCode}</h3>
+      <h3> Telephone: {currentUser.phoneNumber}</h3>
       <form>
         <input type="submit" value="supprimez compte" />
       </form>

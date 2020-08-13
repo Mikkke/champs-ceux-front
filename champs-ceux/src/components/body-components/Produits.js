@@ -8,8 +8,6 @@ const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
 
 const Produits = props => {
-  console.log("props de produit :", props);
-
   const { fetchProduit, produitData } = props;
 
   useEffect(() => {
@@ -22,6 +20,7 @@ const Produits = props => {
 
   const showModal = id => {
     setOpenModal(true);
+    console.log("id du modal :>> ", id);
     Axios.get(`${initialUrl}/${id}`)
       .then(res => {
         setProduitInfos(res.data);
@@ -64,8 +63,6 @@ const Produits = props => {
     <h1>Je charge</h1>
   );
 
-  //code pour le redirect
-
   return (
     <div className="produit-div">
       {produitData.loading ? (
@@ -106,12 +103,6 @@ const Produits = props => {
       </Modal>
     </div>
   );
-
-  /*  return (
-    <div className="panier">
-      <h1>Sur le Panier</h1>
-    </div>
-  ); */
 };
 
 const mapStateToProps = state => {

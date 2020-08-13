@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/produits`;
+
 const Historique = props => {
   console.log("props historique :>> ", props);
   const currentId = props.currentUser ? `${props.currentUser.sellerId}` : null;
@@ -15,7 +18,16 @@ const Historique = props => {
       setHistory(res.data);
     });
   }, [currentId]);
-
+  const deleteProduct = id => {
+    axios
+      .delete(`${initialUrl}/${id}`)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log("error :>> ", error);
+      });
+  };
   const isAuth = localStorage.getItem("auth");
   //console.log("isAuth de produit :>> ", isAuth);
   if (!isAuth) {
@@ -28,14 +40,21 @@ const Historique = props => {
         {history.map((el, index) => {
           return (
             <div className="history-card" key={index}>
-              <h3>{el.product.name}</h3>
-              <p>ajouter le {el.createdAt}</p>
-              <p>prix {el.price}</p>
-              <p>quantité {el.quantity}</p>
-              <p>description {el.description}</p>
-              <p>
-                ajouter le <img src={el.photo} alt="produit" />
-              </p>
+              <div className="card">
+                <img src={el.product.photo} alt="produit" />
+              </div>
+
+              <div className="card-body">
+                <p>{el.product.name}</p>
+                <p>ajouter le {el.product.createdAt.toString()}</p>
+                <p>prix {el.product.price}</p>
+                <p>quantité {el.product.quantity}</p>
+                <p>description {el.product.description}</p>
+              </div>
+              <div>
+                <button onClick={deleteProduct}>Supprimer</button>{" "}
+                <button>modifier</button>
+              </div>
             </div>
           );
         })}
@@ -45,7 +64,8 @@ const Historique = props => {
 };
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    produitData: state.produit
   };
 };
 

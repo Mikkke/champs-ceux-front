@@ -61,7 +61,7 @@ const NavCompte = props => {
           <Link to="historique">Historique</Link>
         </nav>
         {props.currentUser && props.currentUser ? (
-          <form style={{ display: "inline" }} onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="submit"
               name="logout"

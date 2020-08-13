@@ -25,13 +25,12 @@ const Contact = () => {
   });
 
   const onSubmit = async data => {
-    console.log("data :", data);
     try {
       const res = await axios.post(
         "http://localhost:8080/api/send-message",
         data
       );
-      console.log(res.data);
+      console.log("res.data :>> ", res.data);
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +38,7 @@ const Contact = () => {
 
   return (
     <div className="contact">
-      <h1>Contacts</h1>
+      <h1>Contact</h1>
       <div className="container-contact">
         <form className="form-div" onSubmit={handleSubmit(onSubmit)}>
           <label>Nom</label>
