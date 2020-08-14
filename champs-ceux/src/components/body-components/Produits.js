@@ -88,9 +88,8 @@ const Produits = props => {
                 />
                 <div className="card-body">
                   <h1 className="card-title">Produit: {el.name}</h1>
-                  <p>Prix: {el.price}€</p>
-                  <p>Quantite: {el.quantity} KG</p>
-                  <p>Type: {el.type}</p>
+                  <p>Prix: {el.price}€/kg</p>
+                  <p>{el.type}</p>
                   <button onClick={() => showModal(el.id)}>voir produit</button>
                 </div>
               </div>

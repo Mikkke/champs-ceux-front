@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./Nav.css";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -7,15 +6,13 @@ import { useSpring, animated, config } from "react-spring";
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 import { clearCurrentUser } from "../../actions/authAction";
 
 const Nav = props => {
   const currentName = props.currentUser ? (
     <h4>Bonjour {props.currentUser.name}</h4>
   ) : null;
-  const { register, handleSubmit } = useForm();
+
   //console.log("props direct du navbar", props);
   const barAnimation = useSpring({
     from: { transform: "translate3d(0, -10rem, 0)" },
@@ -28,23 +25,6 @@ const Nav = props => {
     delay: 800,
     config: config.wobbly
   });
-
-  const onSubmit = async data => {
-    try {
-      const res = await axios.post(
-        "http://localhost:8080/api/profil/sign-out",
-        data
-      );
-
-      console.log("res :>> ", res);
-      console.log("res.data :>> ", res.data);
-      props.clearCurrentUser(res.data);
-      localStorage.clear();
-    } catch (error) {
-      console.log("error.response :>> ", error.response);
-    }
-  };
-
   /* 
   const [userSession, setUserSession] = useState(null);
 
