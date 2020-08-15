@@ -3,17 +3,17 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import Modal from "../modal/Modal";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+/* import { useForm } from "react-hook-form";
+import * as yup from "yup"; */
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
-const schema = yup.object().shape({
+/* const schema = yup.object().shape({
   name: yup
     .string()
     .max(30, "le nom doit comporter 30 caracteres max")
     .required("ce champs est requis")
-});
+}); */
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
 
@@ -24,11 +24,41 @@ const Historique = ({ currentUser }) => {
   const [openModal, setOpenModal] = useState(false);
   const [produitInfos, setProduitInfos] = useState({});
   const [loading, setLoading] = useState(true);
-  const [updateData, setUpdateDate] = useState([]);
+
   console.log("history :>> ", history);
-  const { register, handleSubmit, errors } = useForm({
+  /*  const { register, errors } = useForm({
     validationSchema: schema
-  });
+  }); */
+
+  ///updated data send
+
+  /* const [name, setName] = useState();
+  const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState();
+  const [description, setDescription] = useState();
+  const [photo, setPhoto] = useState();
+  const [type, setType] = useState(); */
+
+  let data = {
+    name: "",
+    price: "",
+    quantity: "",
+    description: "",
+    /*       photo: "", */
+    type: ""
+  };
+
+  const [updateData, setUpdateData] = useState(data);
+  console.log("updateData :>> ", updateData);
+  const handleChange = e => {
+    setUpdateData({ ...updateData, [e.target.id]: e.target.value });
+    console.log("e.target.value :>> ", e.target.value);
+  };
+  const { name, price, quantity, description, /* photo, */ type } = updateData;
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     console.log("currentId 3:>> ", currentId);
     axios.get(`http://localhost:8080/api/historique/${currentId}`).then(res => {
@@ -38,8 +68,6 @@ const Historique = ({ currentUser }) => {
     });
     console.log("currentId 2 dans le useeffect :>> ", currentId);
   }, [currentId]);
-  console.log("produitInfos pour le modal :>> ", produitInfos);
-
   const showModal = id => {
     setOpenModal(true);
     console.log("id du modal :>> ", id);
@@ -73,56 +101,70 @@ const Historique = ({ currentUser }) => {
           }
           alt="produit"
         />
+
         <div className="modelBody--container">
           <p>Prix {produitInfos.price}</p>
           <h3>Quantité {produitInfos.quantity}</h3>
           <h3> Description {produitInfos.description}</h3>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             placeholder="Nom"
             name="name"
+            id="name"
             type="text"
-            defaultValue={produitInfos.name}
+            value={name}
+            onChange={handleChange}
           />
           <input
             placeholder="Prix"
             name="price"
+            id="price"
             type="number"
-            defaultValue={produitInfos.price}
+            onChange={handleChange}
+            value={price}
           />
           <input
             placeholder="Quantité"
             name="quantity"
+            id="quantity"
             type="number"
-            defaultValue={produitInfos.quantity}
+            onChange={handleChange}
+            value={quantity}
           />
           <input
             placeholder="type"
             name="type"
+            id="type"
             type="text"
-            defaultValue={produitInfos.type}
+            onChange={handleChange}
+            value={type}
           />
           <textarea
             placeholder="descriptioon"
             name="description"
+            id="description"
             type="text"
-            defaultValue={produitInfos.description}
+            onChange={handleChange}
+            value={description}
           />
-          <input
+          {/* <input
             placeholder="photo"
+            id="photo"
             name="name"
             type="file"
-            //value={produitInfos.photo}
-            readOnly={produitInfos.photo}
-          />
+            onChange={handleChange}
+            value={photo}
+          /> */}
         </form>
       </div>
       <div className="modalFooter">
         <button className="modalBtn" onClick={closeModal}>
           Fermer
         </button>
-        <button onClick={() => updateProduct(produitInfos.id)}>Modifier</button>
+        <button onClick={() => updateProduct(produitInfos.id, updateData)}>
+          Modifier
+        </button>
       </div>
     </Fragment>
   ) : (
@@ -142,13 +184,13 @@ const Historique = ({ currentUser }) => {
   };
   const updateProduct = async (id, data) => {
     try {
-      await axios.put(`${initialUrl}/${id}`, data).then(res => {
-        console.log(res.data);
-      });
+      const res = await axios.put(`${initialUrl}/${id}`, data);
+      console.log("res :>> ", res);
+      console.log("res.data :>> ", res.data);
     } catch (error) {
       console.log("error :>> ", error);
     }
-    window.location.reload(false);
+    //window.location.reload(false);
   };
   const isAuth = localStorage.getItem("auth");
   //console.log("isAuth de produit :>> ", isAuth);

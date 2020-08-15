@@ -48,9 +48,11 @@ const Produits = props => {
           alt="produit"
         />
         <div className="modelBody--container">
-          <p>Prix {produitInfos.price}</p>
-          <h3>Quantité {produitInfos.quantity}</h3>
-          <h3> Description {produitInfos.description}</h3>
+          <p>{produitInfos.price} €\kg</p>
+          <h3>
+            {" "}
+            Description <br /> {produitInfos.description}
+          </h3>
         </div>
       </div>
       <div className="modalFooter">
@@ -87,8 +89,8 @@ const Produits = props => {
                   alt="produit"
                 />
                 <div className="card-body">
-                  <h1 className="card-title">Produit: {el.name}</h1>
-                  <p>Prix: {el.price}€/kg</p>
+                  <h1 className="card-title">{el.name}</h1>
+                  <p>{el.price}€/kg</p>
                   <p>{el.type}</p>
                   <button onClick={() => showModal(el.id)}>voir produit</button>
                 </div>
