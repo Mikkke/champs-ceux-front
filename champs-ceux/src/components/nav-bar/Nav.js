@@ -49,7 +49,7 @@ const Nav = props => {
   }, []); */
   const liensVersCompte =
     props.currentUser && props.currentUser ? (
-      <Link to="/navCompte">COMPTE</Link>
+      <Link to="/historique">COMPTE</Link>
     ) : (
       <Link to="/compte">COMPTE</Link>
     );

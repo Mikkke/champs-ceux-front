@@ -3,44 +3,30 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import Modal from "../modal/Modal";
-/* import { useForm } from "react-hook-form";
-import * as yup from "yup"; */
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
-/* const schema = yup.object().shape({
-  name: yup
-    .string()
-    .max(30, "le nom doit comporter 30 caracteres max")
-    .required("ce champs est requis")
-}); */
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
 
 const Historique = ({ currentUser }) => {
   const currentId = currentUser && `${currentUser.sellerId}`;
-  console.log("currentId 4:>> ", currentId);
   const [history, setHistory] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [produitInfos, setProduitInfos] = useState({});
   const [loading, setLoading] = useState(true);
 
-  console.log("history :>> ", history);
-  /*  const { register, errors } = useForm({
-    validationSchema: schema
-  }); */
-
   ///updated data send
 
-  /* const [name, setName] = useState();
-  const [price, setPrice] = useState();
+  const [nameProduct, setNameProduct] = useState("sans le bail");
+  /*const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState();
   const [photo, setPhoto] = useState();
   const [type, setType] = useState(); */
 
   let data = {
-    name: "",
+    name: nameProduct,
     price: "",
     quantity: "",
     description: "",
@@ -52,8 +38,8 @@ const Historique = ({ currentUser }) => {
   console.log("updateData :>> ", updateData);
   const handleChange = e => {
     setUpdateData({ ...updateData, [e.target.id]: e.target.value });
-    console.log("e.target.value :>> ", e.target.value);
   };
+
   const { name, price, quantity, description, /* photo, */ type } = updateData;
   const handleSubmit = e => {
     e.preventDefault();
@@ -68,15 +54,18 @@ const Historique = ({ currentUser }) => {
     });
     console.log("currentId 2 dans le useeffect :>> ", currentId);
   }, [currentId]);
+
   const showModal = id => {
     setOpenModal(true);
     console.log("id du modal :>> ", id);
     axios
       .get(`${initialUrl}/${id}`)
       .then(res => {
-        console.log("res.data du showmodal :>> ", res.data);
+        console.log("res.data id du showmodal :>> ", res.data.id);
         setProduitInfos(res.data);
         setLoading(false);
+        setNameProduct(res.data.name);
+        console.log("res.data.name du show modal:>> ", res.data.name);
       })
       .catch(err => console.log(err));
   };
@@ -92,22 +81,26 @@ const Historique = ({ currentUser }) => {
         <h2>{produitInfos.name}</h2>
       </div>
       <div className="modalBody">
-        <img
-          className="image"
-          src={
-            !produitInfos.photo.includes("firebasestorage.googleapis")
-              ? `${apiBaseURL}${produitInfos.photo}`
-              : produitInfos.photo
-          }
-          alt="produit"
-        />
+        <div className="modal-body--container">
+          <img
+            className="image"
+            src={
+              !produitInfos.photo.includes("firebasestorage.googleapis")
+                ? `${apiBaseURL}${produitInfos.photo}`
+                : produitInfos.photo
+            }
+            alt="produit"
+          />
 
-        <div className="modelBody--container">
-          <p>Prix {produitInfos.price}</p>
-          <h3>Quantité {produitInfos.quantity}</h3>
-          <h3> Description {produitInfos.description}</h3>
+          <div className="modelBody--container">
+            <p>{produitInfos.price}€</p>
+            <p>{produitInfos.quantity}</p>
+            <p>{produitInfos.description}</p>
+            {/* <p>{produitInfos.createdAt}</p> */}
+          </div>
         </div>
-        <form onSubmit={handleSubmit}>
+
+        <form className="form-history--product" onSubmit={handleSubmit}>
           <input
             placeholder="Nom"
             name="name"
@@ -163,7 +156,7 @@ const Historique = ({ currentUser }) => {
           Fermer
         </button>
         <button onClick={() => updateProduct(produitInfos.id, updateData)}>
-          Modifier
+          Valider
         </button>
       </div>
     </Fragment>
@@ -186,7 +179,7 @@ const Historique = ({ currentUser }) => {
     try {
       const res = await axios.put(`${initialUrl}/${id}`, data);
       console.log("res :>> ", res);
-      console.log("res.data :>> ", res.data);
+      console.log("res.data update product :>> ", res.data);
     } catch (error) {
       console.log("error :>> ", error);
     }
@@ -218,13 +211,17 @@ const Historique = ({ currentUser }) => {
                   <p>quantité {el.product.quantity}</p>
                   <p>description {el.product.description}</p>
                 </div>
-                <div>
+                <div className="history-button--container">
                   <MdDelete
+                    className="bin"
                     size={25}
                     onClick={() => deleteProduct(el.product.id)}
                   />
-                  <FaEdit size={25} onClick={() => showModal(el.product.id)} />
-                  {console.log("el.product.id >> ", el.product.id)}
+                  <FaEdit
+                    className="edit"
+                    size={25}
+                    onClick={() => showModal(el.product.id)}
+                  />
                 </div>
               </div>
             );

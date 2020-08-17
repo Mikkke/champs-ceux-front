@@ -468,6 +468,7 @@ body {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     display: flex;
     flex-direction: column;
+   
   }
 
   .modalHeader {
@@ -483,18 +484,27 @@ body {
     background: var(--white-color);
     height: 400px;
     overflow: auto;
-  
     display: flex;
     justify-content: space-around;
     align-items: center;
     img {
       width: 20rem;
       height: 20rem;
+      @media  screen and (max-width : 741px) {
+        width: 7rem;
+        height: 7rem;
+        }
     }
     .modelBody--container  {
       padding: 2rem;
+      @media  screen and (max-width : 741px) {
+        padding: 0;
+        }
     }
-    
+    @media  screen and (max-width : 741px) {
+      height: 200px;
+      width: 300px;
+      }
   }
 
   .modalFooter {
@@ -520,4 +530,40 @@ body {
     border: 1px solid var(--light-grey-color);
     margin: 0;
     font-size: 15px;
+  }
+
+
+  .form-history--product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid greenyellow;
+    height: 20rem;
+    width: 20rem;
+
+    input {
+      height: 2rem;
+      font-size: 1.3rem;
+      outline: none;
+      @media  screen and (max-width : 741px) {
+        height: 1rem;
+        font-size: 1rem;
+      }
+      
+    }
+    textarea {
+      font-size: 1.3rem;
+      height: 7rem;
+      outline: none;
+      @media  screen and (max-width : 741px) {
+        height: 5rem;
+        font-size: 1rem;
+      }
+    }
+    
+    @media  screen and (max-width : 741px) {
+      height: 15rem;
+      width: 10rem;
+ 
+    }
   }
