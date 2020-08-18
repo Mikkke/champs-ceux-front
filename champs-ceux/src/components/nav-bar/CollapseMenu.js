@@ -36,11 +36,11 @@ const CollapseMenu = props => {
             </Link>
           </li>
           <li>
-            <Link to="/compte" onClick={props.handleNavbar}>
+            <Link to="/signup" /*"/signup"*/ onClick={props.handleNavbar}>
               COMPTE
             </Link>
           </li>
-          <li>
+          {/*           <li>
             <Link to="/panier" onClick={props.handleNavbar}>
               Panier
             </Link>
@@ -49,7 +49,7 @@ const CollapseMenu = props => {
             <Link to="/signup" onClick={props.handleNavbar}>
               SignUp
             </Link>
-          </li>
+          </li> */}
         </NavLinks>
       </CollapseWrapper>
     );

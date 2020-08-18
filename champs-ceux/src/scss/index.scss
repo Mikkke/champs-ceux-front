@@ -468,6 +468,7 @@ body {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     display: flex;
     flex-direction: column;
+   
   }
 
   .modalHeader {
@@ -483,18 +484,26 @@ body {
     background: var(--white-color);
     height: 400px;
     overflow: auto;
-  
     display: flex;
     justify-content: space-around;
     align-items: center;
     img {
       width: 20rem;
       height: 20rem;
+      @media  screen and (max-width : 741px) {
+        width: 6rem;
+        height: 6rem;
+        }
     }
     .modelBody--container  {
-      padding: 2rem;
+      @media  screen and (max-width : 741px) {
+        padding: 0;
+        }
     }
-    
+    @media  screen and (max-width : 741px) {
+      height: 200px;
+      width: 300px;
+      }
   }
 
   .modalFooter {
@@ -505,19 +514,65 @@ body {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     border-top: 1px solid var(--light-grey-color);
   }
 
   .modalBtn {
-    background: var(--light-grey-color);
+    //background: var(--light-grey-color);
     padding: 9px 5px;
     width: 90px;
     color: var(--deep-black-color);
     border: 0;
     border-radius: 6px;
     cursor: pointer;
-    border: 1px solid var(--light-grey-color);
+    //border: 1px solid var(--light-grey-color);
     margin: 0;
     font-size: 15px;
+    transition: color 400ms;
+  }
+  .__green {
+    &:hover {
+      color: rgb(53, 158, 53);
+    }
+  }
+  .__red {
+    &:hover {
+      color: rgb(194, 20, 20);
+    }
+  }
+
+
+  .form-history--product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20rem;
+    width: 20rem;
+
+    input {
+      height: 2rem;
+      font-size: 1.3rem;
+      outline: none;
+      @media  screen and (max-width : 741px) {
+        height: 1rem;
+        font-size: 1rem;
+      }
+      
+    }
+    textarea {
+      font-size: 1.3rem;
+      height: 7rem;
+      outline: none;
+      @media  screen and (max-width : 741px) {
+        height: 5rem;
+        font-size: 1rem;
+      }
+    }
+    
+    @media  screen and (max-width : 741px) {
+      height: 15rem;
+      width: 10rem;
+ 
+    }
   }

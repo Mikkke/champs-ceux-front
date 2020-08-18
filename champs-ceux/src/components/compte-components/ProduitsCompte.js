@@ -24,12 +24,9 @@ const ProduitsCompte = props => {
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
-  const [userId, setUserId] = useState(currentId);
-  console.log("userId :>> qui teste le current", userId);
   const onSubmit = async data => {
-    console.log(data.photo[0], "data");
+    console.log("data ouoi", data.photo[0], "data");
     const refStorage = firebase.storage().ref("image" + data.photo[0].name);
-
     let upload = refStorage.put(data.photo[0]);
 
     upload.on(

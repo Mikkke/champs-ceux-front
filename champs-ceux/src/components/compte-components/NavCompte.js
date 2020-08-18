@@ -58,7 +58,7 @@ const NavCompte = props => {
         <nav>
           {vendeur()}
           <Link to="/moncompte">Compte</Link>
-          <Link to="historique">Historique</Link>
+          <Link to="/historique">Historique</Link>
         </nav>
         {props.currentUser && props.currentUser ? (
           <form onSubmit={handleSubmit(onSubmit)}>
