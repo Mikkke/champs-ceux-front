@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Modal from "../modal/Modal";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
@@ -18,7 +20,7 @@ const Historique = ({ currentUser }) => {
 
   ///updated data send
 
-  const [nameProduct, setNameProduct] = useState("sans le bail");
+  const [nameProduct, setNameProduct] = useState("Nom du produit");
   /*const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState();
@@ -152,18 +154,17 @@ const Historique = ({ currentUser }) => {
         </form>
       </div>
       <div className="modalFooter">
-        <button className="modalBtn" onClick={closeModal}>
-          Fermer
-        </button>
-        <button onClick={() => updateProduct(produitInfos.id, updateData)}>
-          Valider
-        </button>
+        <FaTimes size={28} className="modalBtn __red" onClick={closeModal} />
+        <FaCheck
+          className="modalBtn __green"
+          size={28}
+          onClick={() => updateProduct(produitInfos.id, updateData)}
+        />
       </div>
     </Fragment>
   ) : (
     <h1>Je charge</h1>
   );
-
   const deleteProduct = async id => {
     await axios
       .delete(`${initialUrl}/${id}`)
@@ -185,6 +186,7 @@ const Historique = ({ currentUser }) => {
     }
     //window.location.reload(false);
   };
+
   const isAuth = localStorage.getItem("auth");
   //console.log("isAuth de produit :>> ", isAuth);
   if (!isAuth) {
@@ -206,9 +208,9 @@ const Historique = ({ currentUser }) => {
 
                 <div className="card-body">
                   <p>{el.product.name}</p>
-                  <p>ajouter le {el.product.createdAt}</p>
-                  <p>prix {el.product.price}</p>
-                  <p>quantité {el.product.quantity}</p>
+                  <p>{el.date}</p>
+                  <p>{el.product.price}€</p>
+                  <p>{el.product.quantity}</p>
                   <p>description {el.product.description}</p>
                 </div>
                 <div className="history-button--container">
