@@ -95,7 +95,7 @@ const ProduitsCompte = props => {
             defaultValue={currentId}
           /> */}
           <button type="submit" value="ajouter a la liste">
-            Ajouter produit
+            Ajouter
           </button>
         </form>
       </div>

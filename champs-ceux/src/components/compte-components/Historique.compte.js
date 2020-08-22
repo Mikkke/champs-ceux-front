@@ -20,20 +20,20 @@ const Historique = ({ currentUser }) => {
 
   ///updated data send
 
-  const [nameProduct, setNameProduct] = useState("Nom du produit");
-  /*const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
-  const [photo, setPhoto] = useState();
-  const [type, setType] = useState(); */
+  const [nameProduct, setNameProduct] = useState("");
+  const [priceProduct, setPriceProduct] = useState("");
+  const [quantityProduct, setQuantityProduct] = useState("");
+  const [descriptionProduct, setDescriptionProduct] = useState("");
+  const [photoProduct, setPhotoProduct] = useState("");
+  const [typeProduct, setTypeProduct] = useState("");
 
   let data = {
     name: nameProduct,
-    price: "",
-    quantity: "",
-    description: "",
-    /*       photo: "", */
-    type: ""
+    price: priceProduct,
+    quantity: quantityProduct,
+    description: descriptionProduct,
+    photo: photoProduct,
+    type: typeProduct
   };
 
   const [updateData, setUpdateData] = useState(data);
@@ -42,7 +42,7 @@ const Historique = ({ currentUser }) => {
     setUpdateData({ ...updateData, [e.target.id]: e.target.value });
   };
 
-  const { name, price, quantity, description, /* photo, */ type } = updateData;
+  const { name, price, quantity, description, photo, type } = updateData;
   const handleSubmit = e => {
     e.preventDefault();
   };
@@ -57,16 +57,21 @@ const Historique = ({ currentUser }) => {
     console.log("currentId 2 dans le useeffect :>> ", currentId);
   }, [currentId]);
 
-  const showModal = id => {
+  const showModal = async id => {
     setOpenModal(true);
     console.log("id du modal :>> ", id);
-    axios
+    await axios
       .get(`${initialUrl}/${id}`)
       .then(res => {
         console.log("res.data id du showmodal :>> ", res.data.id);
         setProduitInfos(res.data);
         setLoading(false);
         setNameProduct(res.data.name);
+        setPriceProduct(res.data.price);
+        setQuantityProduct(res.data.quantity);
+        setDescriptionProduct(res.data.description);
+        setTypeProduct(res.data.type);
+        setPhotoProduct(res.data.product);
         console.log("res.data.name du show modal:>> ", res.data.name);
       })
       .catch(err => console.log(err));
@@ -96,7 +101,6 @@ const Historique = ({ currentUser }) => {
 
           <div className="modelBody--container">
             <p>{produitInfos.price}€</p>
-            <p>{produitInfos.quantity}</p>
             <p>{produitInfos.description}</p>
             {/* <p>{produitInfos.createdAt}</p> */}
           </div>
@@ -143,14 +147,14 @@ const Historique = ({ currentUser }) => {
             onChange={handleChange}
             value={description}
           />
-          {/* <input
+          <input
             placeholder="photo"
             id="photo"
             name="name"
             type="file"
             onChange={handleChange}
             value={photo}
-          /> */}
+          />
         </form>
       </div>
       <div className="modalFooter">
@@ -194,7 +198,7 @@ const Historique = ({ currentUser }) => {
   }
   return (
     <div className="compte-historique">
-      <h3>Retrouver vos produit ici</h3>
+      <h3>Retrouver vos produits</h3>
       <div className="compte-historique--container">
         {history.length === 0 ? (
           <p>Vous navez rien mis en ligne encore</p>
@@ -210,8 +214,6 @@ const Historique = ({ currentUser }) => {
                   <p>{el.product.name}</p>
                   <p>{el.date}</p>
                   <p>{el.product.price}€</p>
-                  <p>{el.product.quantity}</p>
-                  <p>description {el.product.description}</p>
                 </div>
                 <div className="history-button--container">
                   <MdDelete
