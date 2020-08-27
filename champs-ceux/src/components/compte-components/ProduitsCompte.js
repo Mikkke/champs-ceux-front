@@ -75,7 +75,7 @@ const ProduitsCompte = props => {
           />
           <label>type </label>
           <select name="type" form="carform" className="select" ref={register}>
-            <option>Fruit</option>
+            <option>fruit</option>
             <option>legume</option>
             <option>produit laitier</option>
             <option>viande</option>

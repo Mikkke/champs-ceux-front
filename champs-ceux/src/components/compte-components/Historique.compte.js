@@ -7,11 +7,13 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
+import { firebase } from "../../firebase/Firebase";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
-
+// eslint-disable-next-line react/prop-types
 const Historique = ({ currentUser }) => {
+  // eslint-disable-next-line react/prop-types
   const currentId = currentUser && `${currentUser.sellerId}`;
   const [history, setHistory] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -33,6 +35,7 @@ const Historique = ({ currentUser }) => {
     quantity: quantityProduct,
     description: descriptionProduct,
     photo: photoProduct,
+    /*  file: "", */
     type: typeProduct
   };
 
@@ -50,7 +53,7 @@ const Historique = ({ currentUser }) => {
   useEffect(() => {
     console.log("currentId 3:>> ", currentId);
     axios.get(`http://localhost:8080/api/historique/${currentId}`).then(res => {
-      console.log("res.data :>> ", res.data);
+      // console.log("res.data :>> ", res.data);
       setHistory(res.data);
       console.log("currentId 1 dans le useeffect :>> ", currentId);
     });
@@ -58,12 +61,14 @@ const Historique = ({ currentUser }) => {
   }, [currentId]);
 
   const showModal = async id => {
-    setOpenModal(true);
-    console.log("id du modal :>> ", id);
+    console.log("updateData au debut du show:>> ", updateData);
+    // console.log("id du modal :>> ", id);
     await axios
       .get(`${initialUrl}/${id}`)
       .then(res => {
-        console.log("res.data id du showmodal :>> ", res.data.id);
+        //console.log("res.data id du showmodal :>> ", res.data.id);
+        setUpdateData(res.data);
+        /* setUpdateData(...updateData, { photo: null }); */
         setProduitInfos(res.data);
         setLoading(false);
         setNameProduct(res.data.name);
@@ -73,6 +78,7 @@ const Historique = ({ currentUser }) => {
         setTypeProduct(res.data.type);
         setPhotoProduct(res.data.product);
         console.log("res.data.name du show modal:>> ", res.data.name);
+        setOpenModal(true);
       })
       .catch(err => console.log(err));
   };
@@ -86,6 +92,8 @@ const Historique = ({ currentUser }) => {
     <Fragment>
       <div className="modalHeader">
         <h2>{produitInfos.name}</h2>
+        {console.log("nameProduct  du showmodal>> ", nameProduct)}
+        {console.log("data du showmodal >> ", data)}
       </div>
       <div className="modalBody">
         <div className="modal-body--container">
@@ -153,7 +161,6 @@ const Historique = ({ currentUser }) => {
             name="name"
             type="file"
             onChange={handleChange}
-            value={photo}
           />
         </form>
       </div>
@@ -172,22 +179,58 @@ const Historique = ({ currentUser }) => {
   const deleteProduct = async id => {
     await axios
       .delete(`${initialUrl}/${id}`)
-      .then(res => {
-        console.log(res.data);
-      })
+      /* .then(res => {
+        //console.log(res.data);
+      }) */
       .catch(error => {
         console.log("error :>> ", error);
       });
     window.location.reload(false);
   };
   const updateProduct = async (id, data) => {
-    try {
+    console.log("data.photo[0] :>> ", data.photo);
+    if (!data.photo[0]) {
+      let refStorage = firebase.storage().ref("image" + data.photo[0].name);
+
+      let upload = refStorage.put(data.photo[0]);
+
+      console.log("data du update :>> ", data);
+
+      upload.on(
+        "state_changed",
+        snapshot => {},
+        error => {},
+        async () => {
+          const url = await upload.snapshot.ref.getDownloadURL();
+          data.photo = url;
+          try {
+            const res = await axios.put(`${initialUrl}/${id}`, data);
+            console.log("res :>> ", res);
+            console.log("data ici bas", res.data);
+          } catch (error) {
+            console.error(error);
+          }
+          // return url;
+        }
+      );
+    } else {
+      try {
+        const res = await axios.put(`${initialUrl}/${id}`, data);
+        console.log("res :>> ", res);
+        console.log("data ici bas", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    /*   try {
       const res = await axios.put(`${initialUrl}/${id}`, data);
-      console.log("res :>> ", res);
-      console.log("res.data update product :>> ", res.data);
+      // console.log("res :>> ", res);
+      //console.log("data :>> ", data);
+      //console.log("res.data update product :>> ", res.data);
     } catch (error) {
       console.log("error :>> ", error);
-    }
+    } */
     //window.location.reload(false);
   };
 

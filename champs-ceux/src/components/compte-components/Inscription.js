@@ -7,12 +7,12 @@ import axios from "axios";
 const schema = yup.object().shape({
   name: yup
     .string()
-    .min(1, "ce champs ne doit pas depasser 10 caracteres")
+    .min(4, "ce champs prend au minimum 4 caracteres")
+    .max(20, "ce champs ne doit pas depasser 20 caracteres")
     .required("ce champs est requis"),
   email: yup
     .string()
     .email()
-    .max(30, "ne doit pas depasser 30 caracteres")
     .required("ce champs est requis"),
   /*   address: yup
     .string()
@@ -20,11 +20,12 @@ const schema = yup.object().shape({
     .required("ce champs est requis"), */
   password: yup
     .string()
-    .min(6, "doit contenir plus de 6 caracter")
+    .min(6, "doit contenir plus de 6 caracteres")
     .required("ce champs est requis"),
-  city: yup
+  postalCode: yup
     .string()
-    .max(5, "code non valide")
+    .max(5, "code postal non valide")
+    .min(5, "code postal non valide")
     .required("ce champs est requis"),
   phoneNumber: yup
     .string()
@@ -41,8 +42,8 @@ const Inscription = ({ history }) => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profilType, setProfilType] = useState("");
-  const [adress, setAdress] = useState("");
+  /* s */
+  /*   const [adress, setAdress] = useState(""); */
 
   const onSubmit = async data => {
     console.log("data :>> ", data);
@@ -64,7 +65,7 @@ const Inscription = ({ history }) => {
     }
   };
 
-  const addressInput =
+  /*   const addressInput =
     profilType === "seller" ? (
       <div>
         <input
@@ -79,7 +80,7 @@ const Inscription = ({ history }) => {
         />
         {errors.adress && errors.adress.message}
       </div>
-    ) : null;
+    ) : null; */
 
   return (
     <div className="inscription-div">
@@ -112,13 +113,13 @@ const Inscription = ({ history }) => {
               name="profilType"
               form="carform"
               className="select"
-              onChange={e => setProfilType(e.target.value)}
+              defaultValue="seller"
               ref={register}
             >
               <option value="seller">Agriculteur</option>
             </select>
           </div>
-          {addressInput}
+          {/* {addressInput} */}
           <input
             name="city"
             type="text"
@@ -126,6 +127,7 @@ const Inscription = ({ history }) => {
             placeholder="ville"
             required
           />
+          {errors.city && errors.city.message}
           <input
             name="postalCode"
             type="text"
@@ -133,6 +135,7 @@ const Inscription = ({ history }) => {
             placeholder="code postal"
             required
           />
+          {errors.postalCode && errors.postalCode.message}
           <input
             name="phoneNumber"
             type="text"
@@ -140,6 +143,7 @@ const Inscription = ({ history }) => {
             placeholder="telephone"
             required
           />
+          {errors.phoneNumber && errors.phoneNumber.message}
 
           <input
             type="password"

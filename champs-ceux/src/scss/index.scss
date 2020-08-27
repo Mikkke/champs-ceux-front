@@ -361,6 +361,68 @@ body {
   }
  }
 }
+
+.forget-password {
+  background-image: url("../assets/jardinner.jpg");
+  background-size: cover;
+  width: 100%;
+  height: calc(110vh - 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wrap
+  {
+    max-width: 350px;
+    border-radius: 20px;
+    /* margin: auto; */
+    background: rgba($color: #000000, $alpha: 0.8);
+    box-sizing: border-box;
+    padding: 40px;
+    color: #fff;
+    margin-top: 100px;
+    h2 {
+      text-align: center;
+    }
+    form {
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 5px;
+        background: rgba($color: #000000, $alpha: 0.10);
+        outline: none;
+        border: none;
+        /* border-bottom: 1px solid #fff; */
+        color: #fff;
+        border-radius: 5px;
+        margin: 5px;
+        font-size: 20px;
+        
+      }
+      button {
+       width: 100%;
+       box-sizing: border-box;
+       padding: 10px 0;
+       margin-top: 30px;
+       outline: none;
+       border: none;
+       background: #033d6f;
+       /* opacity: 0.7; */
+       color: #fff;
+       border-radius: 5px;
+       font-size: 20px;
+       transition: all 400ms;
+       &:hover {
+         color: #033d6f;
+ 
+         background: white;
+         /* opacity: 0.7; */
+         border: 1px solid #033d6f;
+       }
+    }
+      
+    }
+  }
+}
 }
 
 
