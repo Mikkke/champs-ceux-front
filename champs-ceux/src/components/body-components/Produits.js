@@ -50,9 +50,11 @@ const Produits = props => {
         <div className="modelBody--container">
           <p>{produitInfos.price} €\kg</p>
           <h3>
-            {" "}
             Description <br /> {produitInfos.description}
           </h3>
+          <p>{produitInfos["seller.profil.city"]}</p>
+          <p>{produitInfos["seller.profil.postalCode"]}</p>
+          <p>{produitInfos["seller.profil.phoneNumber"]}</p>
         </div>
       </div>
       <div className="modalFooter">
@@ -64,7 +66,6 @@ const Produits = props => {
   ) : (
     <h1>Je charge</h1>
   );
-
   return (
     <div className="produit-div">
       {produitData.loading ? (
@@ -92,6 +93,8 @@ const Produits = props => {
                   <h1 className="card-title">{el.name}</h1>
                   <p>{el.price}€/kg</p>
                   <p>{el.type}</p>
+                  <p>{el["seller.profil.city"]}</p>
+                  <p>{el["seller.profil.postalCode"]}</p>
                   <button onClick={() => showModal(el.id)}>voir produit</button>
                 </div>
               </div>
@@ -99,6 +102,7 @@ const Produits = props => {
           );
         })
       )}
+      {console.log("Modal :>> ", Modal)}
       <Modal showModal={openModal} closeModal={closeModal}>
         {resultInModal}
       </Modal>

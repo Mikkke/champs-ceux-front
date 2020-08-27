@@ -10,18 +10,17 @@ const schema = yup.object().shape({
   email: yup
     .string()
     .email()
-    .max(30, "ne doit pas depasser 30 caracteres")
     .required("ce champs est requis"),
   password: yup
     .string()
-    .min(6, "doit contenir plus de 6 caracterers")
+    .min(6, "doit contenir plus de 6 caracteres")
     .required("ce champs est requis")
 });
 
 // eslint-disable-next-line react/prop-types
 const Connexion = props => {
   const [error, setError] = useState("");
-  console.log("props de connexion sur le bitin :>> ", props);
+  //console.log("props de connexion sur le bitin :>> ", props);
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
@@ -37,6 +36,7 @@ const Connexion = props => {
       localStorage.setItem("auth", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
       props.setCurrentUser(res.data);
+      // eslint-disable-next-line react/prop-types
       props.history.push("/navCompte");
       //localStorage.setItem("user", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
@@ -76,6 +76,9 @@ const Connexion = props => {
         </form>
         <p>
           Pas encore de compte ? <Link to="/inscription">inscrivez-vous</Link>{" "}
+        </p>
+        <p>
+          <Link to="/forget-password">Mot de passe oublié ?</Link>
         </p>
       </div>
     </div>

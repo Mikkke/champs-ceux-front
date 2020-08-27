@@ -65,7 +65,7 @@ const NavCompte = props => {
             <input
               type="submit"
               name="logout"
-              value="deconnexion"
+              value="déconnexion"
               ref={register}
             />
           </form>

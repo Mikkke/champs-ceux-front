@@ -7,11 +7,13 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
+import { firebase } from "../../firebase/Firebase";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
-
+// eslint-disable-next-line react/prop-types
 const Historique = ({ currentUser }) => {
+  // eslint-disable-next-line react/prop-types
   const currentId = currentUser && `${currentUser.sellerId}`;
   const [history, setHistory] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -20,20 +22,21 @@ const Historique = ({ currentUser }) => {
 
   ///updated data send
 
-  const [nameProduct, setNameProduct] = useState("Nom du produit");
-  /*const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
-  const [photo, setPhoto] = useState();
-  const [type, setType] = useState(); */
+  const [nameProduct, setNameProduct] = useState("");
+  const [priceProduct, setPriceProduct] = useState("");
+  const [quantityProduct, setQuantityProduct] = useState("");
+  const [descriptionProduct, setDescriptionProduct] = useState("");
+  const [photoProduct, setPhotoProduct] = useState("");
+  const [typeProduct, setTypeProduct] = useState("");
 
   let data = {
     name: nameProduct,
-    price: "",
-    quantity: "",
-    description: "",
-    /*       photo: "", */
-    type: ""
+    price: priceProduct,
+    quantity: quantityProduct,
+    description: descriptionProduct,
+    photo: photoProduct,
+    /*  file: "", */
+    type: typeProduct
   };
 
   const [updateData, setUpdateData] = useState(data);
@@ -42,7 +45,7 @@ const Historique = ({ currentUser }) => {
     setUpdateData({ ...updateData, [e.target.id]: e.target.value });
   };
 
-  const { name, price, quantity, description, /* photo, */ type } = updateData;
+  const { name, price, quantity, description, photo, type } = updateData;
   const handleSubmit = e => {
     e.preventDefault();
   };
@@ -50,24 +53,32 @@ const Historique = ({ currentUser }) => {
   useEffect(() => {
     console.log("currentId 3:>> ", currentId);
     axios.get(`http://localhost:8080/api/historique/${currentId}`).then(res => {
-      console.log("res.data :>> ", res.data);
+      // console.log("res.data :>> ", res.data);
       setHistory(res.data);
       console.log("currentId 1 dans le useeffect :>> ", currentId);
     });
     console.log("currentId 2 dans le useeffect :>> ", currentId);
   }, [currentId]);
 
-  const showModal = id => {
-    setOpenModal(true);
-    console.log("id du modal :>> ", id);
-    axios
+  const showModal = async id => {
+    console.log("updateData au debut du show:>> ", updateData);
+    // console.log("id du modal :>> ", id);
+    await axios
       .get(`${initialUrl}/${id}`)
       .then(res => {
-        console.log("res.data id du showmodal :>> ", res.data.id);
+        //console.log("res.data id du showmodal :>> ", res.data.id);
+        setUpdateData(res.data);
+        /* setUpdateData(...updateData, { photo: null }); */
         setProduitInfos(res.data);
         setLoading(false);
         setNameProduct(res.data.name);
+        setPriceProduct(res.data.price);
+        setQuantityProduct(res.data.quantity);
+        setDescriptionProduct(res.data.description);
+        setTypeProduct(res.data.type);
+        setPhotoProduct(res.data.product);
         console.log("res.data.name du show modal:>> ", res.data.name);
+        setOpenModal(true);
       })
       .catch(err => console.log(err));
   };
@@ -81,6 +92,8 @@ const Historique = ({ currentUser }) => {
     <Fragment>
       <div className="modalHeader">
         <h2>{produitInfos.name}</h2>
+        {console.log("nameProduct  du showmodal>> ", nameProduct)}
+        {console.log("data du showmodal >> ", data)}
       </div>
       <div className="modalBody">
         <div className="modal-body--container">
@@ -96,7 +109,6 @@ const Historique = ({ currentUser }) => {
 
           <div className="modelBody--container">
             <p>{produitInfos.price}€</p>
-            <p>{produitInfos.quantity}</p>
             <p>{produitInfos.description}</p>
             {/* <p>{produitInfos.createdAt}</p> */}
           </div>
@@ -143,14 +155,13 @@ const Historique = ({ currentUser }) => {
             onChange={handleChange}
             value={description}
           />
-          {/* <input
+          <input
             placeholder="photo"
             id="photo"
             name="name"
             type="file"
             onChange={handleChange}
-            value={photo}
-          /> */}
+          />
         </form>
       </div>
       <div className="modalFooter">
@@ -168,22 +179,58 @@ const Historique = ({ currentUser }) => {
   const deleteProduct = async id => {
     await axios
       .delete(`${initialUrl}/${id}`)
-      .then(res => {
-        console.log(res.data);
-      })
+      /* .then(res => {
+        //console.log(res.data);
+      }) */
       .catch(error => {
         console.log("error :>> ", error);
       });
     window.location.reload(false);
   };
   const updateProduct = async (id, data) => {
-    try {
+    console.log("data.photo[0] :>> ", data.photo);
+    if (!data.photo[0]) {
+      let refStorage = firebase.storage().ref("image" + data.photo[0].name);
+
+      let upload = refStorage.put(data.photo[0]);
+
+      console.log("data du update :>> ", data);
+
+      upload.on(
+        "state_changed",
+        snapshot => {},
+        error => {},
+        async () => {
+          const url = await upload.snapshot.ref.getDownloadURL();
+          data.photo = url;
+          try {
+            const res = await axios.put(`${initialUrl}/${id}`, data);
+            console.log("res :>> ", res);
+            console.log("data ici bas", res.data);
+          } catch (error) {
+            console.error(error);
+          }
+          // return url;
+        }
+      );
+    } else {
+      try {
+        const res = await axios.put(`${initialUrl}/${id}`, data);
+        console.log("res :>> ", res);
+        console.log("data ici bas", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    /*   try {
       const res = await axios.put(`${initialUrl}/${id}`, data);
-      console.log("res :>> ", res);
-      console.log("res.data update product :>> ", res.data);
+      // console.log("res :>> ", res);
+      //console.log("data :>> ", data);
+      //console.log("res.data update product :>> ", res.data);
     } catch (error) {
       console.log("error :>> ", error);
-    }
+    } */
     //window.location.reload(false);
   };
 
@@ -194,7 +241,7 @@ const Historique = ({ currentUser }) => {
   }
   return (
     <div className="compte-historique">
-      <h3>Retrouver vos produit ici</h3>
+      <h3>Retrouver vos produits</h3>
       <div className="compte-historique--container">
         {history.length === 0 ? (
           <p>Vous navez rien mis en ligne encore</p>
@@ -210,8 +257,6 @@ const Historique = ({ currentUser }) => {
                   <p>{el.product.name}</p>
                   <p>{el.date}</p>
                   <p>{el.product.price}€</p>
-                  <p>{el.product.quantity}</p>
-                  <p>description {el.product.description}</p>
                 </div>
                 <div className="history-button--container">
                   <MdDelete
