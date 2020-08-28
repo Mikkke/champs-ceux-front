@@ -25,7 +25,11 @@ const ProduitsCompte = props => {
     validationSchema: schema
   });
   const onSubmit = async data => {
-    console.log("data ouoi", data.photo[0], "data");
+    /*     console.log("data :>> ", data);
+    const formData = new FormData();
+    formData.append("photo", data.photo);
+ */
+    console.log("data je cherche ta valeur", data.photo[0], "data");
     const refStorage = firebase.storage().ref("image" + data.photo[0].name);
     let upload = refStorage.put(data.photo[0]);
 
@@ -35,6 +39,7 @@ const ProduitsCompte = props => {
       error => {},
       async () => {
         const url = await upload.snapshot.ref.getDownloadURL();
+        console.log("url :>> ", url);
         data.photo = url;
         try {
           const res = await axios.post(
@@ -87,13 +92,6 @@ const ProduitsCompte = props => {
             name="description"
             placeholder="description"
           />
-          {/* <label>userId </label>
-          <input
-            ref={register}
-            name="sellerId"
-            type="text"
-            defaultValue={currentId}
-          /> */}
           <button type="submit" value="ajouter a la liste">
             Ajouter
           </button>
