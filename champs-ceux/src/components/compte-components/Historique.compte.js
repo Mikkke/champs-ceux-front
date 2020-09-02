@@ -24,7 +24,6 @@ const Historique = ({ currentUser }) => {
   //let fileInput = React.createRef();
   const [nameProduct, setNameProduct] = useState("");
   const [priceProduct, setPriceProduct] = useState("");
-  const [quantityProduct, setQuantityProduct] = useState("");
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [photoProduct, setPhotoProduct] = useState("");
   const [typeProduct, setTypeProduct] = useState("");
@@ -32,13 +31,19 @@ const Historique = ({ currentUser }) => {
   let data = {
     name: nameProduct,
     price: priceProduct,
-    quantity: quantityProduct,
     description: descriptionProduct,
     photo: "",
     type: typeProduct
   };
 
   const [updateData, setUpdateData] = useState(data);
+  const [succesMessage, setSuccesMessage] = useState("");
+  const succes = succesMessage ? (
+    <h2 className="succes-header">{succesMessage}</h2>
+  ) : (
+    ""
+  );
+  console.log("succesMessage :>> ", succesMessage);
   console.log("updateData :>> ", updateData);
   const handleChange = e => {
     setUpdateData({
@@ -52,7 +57,7 @@ const Historique = ({ currentUser }) => {
     setUpdateData({ ...updateData, photo: e.target.files });
   };
 
-  const { name, price, quantity, description, photo, type } = updateData;
+  const { name, price, description, photo, type } = updateData;
   const handleSubmit = e => {
     e.preventDefault();
   };
@@ -72,12 +77,12 @@ const Historique = ({ currentUser }) => {
       .then(res => {
         //console.log("res.data id du showmodal :>> ", res.data.id);
         setUpdateData(res.data);
+        setSuccesMessage("");
         /* setUpdateData(...updateData, { photo: null }); */
         setProduitInfos(res.data);
         setLoading(false);
         setNameProduct(res.data.name);
         setPriceProduct(res.data.price);
-        setQuantityProduct(res.data.quantity);
         setDescriptionProduct(res.data.description);
         setTypeProduct(res.data.type);
         /*  setPhotoProduct(res.data.photo); */
@@ -113,11 +118,13 @@ const Historique = ({ currentUser }) => {
           <div className="modelBody--container">
             <p>{produitInfos.price}€</p>
             <p>{produitInfos.description}</p>
+
             {/* <p>{produitInfos.createdAt}</p> */}
           </div>
         </div>
 
         <form className="form-history--product" onSubmit={handleSubmit}>
+          {succes}
           <input
             placeholder="Nom"
             name="name"
@@ -135,20 +142,19 @@ const Historique = ({ currentUser }) => {
             value={price}
           />
           <input
-            placeholder="Quantité"
-            name="quantity"
-            id="quantity"
-            type="number"
-            onChange={handleChange}
-            value={quantity}
-          />
-          <input
             placeholder="type"
             name="type"
             id="type"
             type="text"
             onChange={handleChange}
             value={type}
+          />
+          <input
+            placeholder="photo"
+            name="photo"
+            type="file"
+            accept="image/*"
+            onChange={handleOnUploadFile}
           />
           <textarea
             placeholder="descriptioon"
@@ -157,13 +163,6 @@ const Historique = ({ currentUser }) => {
             type="text"
             onChange={handleChange}
             value={description}
-          />
-          <input
-            placeholder="photo"
-            name="photo"
-            type="file"
-            accept="image/*"
-            onChange={handleOnUploadFile}
           />
         </form>
       </div>
@@ -191,8 +190,6 @@ const Historique = ({ currentUser }) => {
     window.location.reload(false);
   };
   const updateProduct = async (id, data) => {
-    console.log("data :>> ", ...data);
-
     if (!data.photo[0]) {
       console.log("data.photo dans le if update :>> ", data.photo[0]);
       let refStorage = firebase
@@ -227,6 +224,7 @@ const Historique = ({ currentUser }) => {
         const res = await axios.put(`${initialUrl}/${id}`, data);
         console.log("res :>> ", res);
         console.log("data ici bas", res.data);
+        setSuccesMessage(res.data);
       } catch (error) {
         console.error(error);
       }

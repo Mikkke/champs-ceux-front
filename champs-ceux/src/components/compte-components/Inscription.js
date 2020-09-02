@@ -7,7 +7,7 @@ import axios from "axios";
 const schema = yup.object().shape({
   name: yup
     .string()
-    .min(4, "ce champs prend au minimum 4 caracteres")
+    .min(2, "ce champs prend au minimum 4 caracteres")
     .max(20, "ce champs ne doit pas depasser 20 caracteres")
     .required("ce champs est requis"),
   email: yup
@@ -21,6 +21,10 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .min(6, "doit contenir plus de 6 caracteres")
+    .required("ce champs est requis"),
+  city: yup
+    .string()
+    .min(3)
     .required("ce champs est requis"),
   postalCode: yup
     .string()
@@ -42,6 +46,7 @@ const Inscription = ({ history }) => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   /* s */
   /*   const [adress, setAdress] = useState(""); */
 
@@ -53,12 +58,12 @@ const Inscription = ({ history }) => {
           "http://localhost:8080/api/profil/register",
           data
         );
-        console.log("res.data :>> ", res.data);
         console.log("res.data.response :>> ", res.data.message);
         // eslint-disable-next-line react/prop-types
         history.push("/compte");
       } catch (error) {
         console.log("error :>> ", error.response.data.message);
+        setError(error.response.data.message);
       }
     } else {
       alert("les mot de passe ne correspondent pas");
@@ -86,6 +91,7 @@ const Inscription = ({ history }) => {
     <div className="inscription-div">
       <div className="wrap-inscription">
         <h2>Inscription</h2>
+        {<span className="span-error">{error}</span>}
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
@@ -100,14 +106,14 @@ const Inscription = ({ history }) => {
           <input
             type="email"
             id="email"
-            placeholder="Email.."
+            placeholder="Email..."
             required
             name="email"
             ref={register}
           />
           {errors.email && errors.email.message}
 
-          <div className="inputBox">
+          {/* <div className="inputBox">
             <label>Je suis</label>
             <select
               name="profilType"
@@ -118,13 +124,19 @@ const Inscription = ({ history }) => {
             >
               <option value="seller">Agriculteur</option>
             </select>
-          </div>
+          </div> */}
           {/* {addressInput} */}
+          <input
+            name="profilType"
+            type="hidden"
+            ref={register}
+            defaultValue="seller"
+          />
           <input
             name="city"
             type="text"
             ref={register}
-            placeholder="ville"
+            placeholder="Ville..."
             required
           />
           {errors.city && errors.city.message}
@@ -132,7 +144,7 @@ const Inscription = ({ history }) => {
             name="postalCode"
             type="text"
             ref={register}
-            placeholder="code postal"
+            placeholder="Code postal..."
             required
           />
           {errors.postalCode && errors.postalCode.message}
@@ -140,7 +152,7 @@ const Inscription = ({ history }) => {
             name="phoneNumber"
             type="text"
             ref={register}
-            placeholder="telephone"
+            placeholder="Télephone..."
             required
           />
           {errors.phoneNumber && errors.phoneNumber.message}
@@ -151,7 +163,7 @@ const Inscription = ({ history }) => {
             name="password"
             ref={register}
             onChange={e => setPassword(e.target.value)}
-            placeholder="Mot de passe.."
+            placeholder="Mot de passe..."
           />
           {errors.password && errors.password.message}
 
@@ -159,12 +171,12 @@ const Inscription = ({ history }) => {
             type="password"
             id="confirmPassword"
             onChange={e => setConfirmPassword(e.target.value)}
-            placeholder="confirmer mot de passe.."
+            placeholder="Confirmer mot de passe..."
           />
           <button type="submit">Inscrivez-vous</button>
         </form>
         <p>
-          Deja un compte ? <Link to="/compte">Connectez-vous</Link>
+          Déja un compte ? <Link to="/compte">Connectez-vous</Link>
         </p>
       </div>
     </div>

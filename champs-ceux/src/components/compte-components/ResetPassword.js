@@ -26,7 +26,7 @@ const ResetPassword = props => {
     setToken(resetToken);
     console.log("email :>> ", email);
     console.log("resetToken :>> ", resetToken);
-  });
+  }, [props.match.params.email, props.match.params.token]);
 
   console.log("props :>> ", props);
   const onSubmit = async data => {

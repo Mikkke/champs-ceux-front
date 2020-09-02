@@ -15,11 +15,11 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+/* firebase.analytics(); */
 
 const refStorage = firebase.storage().ref(`image_produitfileName`); //modif ici avec tidle et
-const fireAuth = firebase.auth();
+/* const fireAuth = firebase.auth(); */
 //var alovelaceDocumentRef = db.doc('users/alovelace');
 const fireStore = firebase.firestore();
 
-export { fireAuth, firebase, fireStore, refStorage as default };
+export { /* fireAuth, */ firebase, fireStore, refStorage as default };
