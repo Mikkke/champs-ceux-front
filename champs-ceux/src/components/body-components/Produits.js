@@ -48,13 +48,14 @@ const Produits = props => {
           alt="produit"
         />
         <div className="modelBody--container">
-          <p>{produitInfos.price} €\kg</p>
-          <h3>
-            Description <br /> {produitInfos.description}
-          </h3>
-          <p>{produitInfos["seller.profil.city"]}</p>
-          <p>{produitInfos["seller.profil.postalCode"]}</p>
-          <p>{produitInfos["seller.profil.phoneNumber"]}</p>
+          <p>Prix: {produitInfos.price}€/kg</p>
+          <p>type: {produitInfos.type}</p>
+          <p>
+            Description : <br /> {produitInfos.description}
+          </p>
+          <p>Ville: {produitInfos["seller.profil.city"]}</p>
+          <p>Code postal: {produitInfos["seller.profil.postalCode"]}</p>
+          <p>Télephone: {produitInfos["seller.profil.phoneNumber"]}</p>
         </div>
       </div>
       <div className="modalFooter">

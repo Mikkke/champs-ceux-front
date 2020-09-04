@@ -55,7 +55,7 @@ body {
   background: rgb(248, 246, 246);
   .my-card{
     display: flex;
-    width: 12rem;
+    width: 15rem;
     min-height: 300px;
     /* padding: 15px; */
     margin: 20px;
@@ -79,6 +79,9 @@ body {
         }
         h1 {
           font-size: 1.2rem;
+        }
+        p {
+          margin: 0.5rem;
         }
         button {
           margin: 5px;
@@ -227,6 +230,10 @@ body {
    padding: 40px;
    color: #fff;
    margin-top: 100px;
+   span {
+    font-size: 1.5rem;
+    color: red;
+  }
    h2 {
      text-align: center;
    }
@@ -299,6 +306,10 @@ body {
    margin-top: 100px;
    h2 {
      text-align: center;
+   }
+   span {
+     font-size: 1.5rem;
+     color: red;
    }
    form {
      input {
@@ -617,8 +628,8 @@ body {
       font-size: 1.3rem;
       outline: none;
       @media  screen and (max-width : 741px) {
-        height: 1rem;
-        font-size: 1rem;
+        //height: 1rem;
+        font-size: 0.6rem;
       }
       
     }

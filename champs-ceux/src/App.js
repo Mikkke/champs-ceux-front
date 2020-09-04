@@ -13,6 +13,7 @@ import NavCompte from "./components/compte-components/NavCompte";
 import { connect } from "react-redux";
 import RouterCompte from "./components/compte-components/RouterCompte";
 import ForgetPassword from "./components/compte-components/ForgetPassword";
+import ResetPassword from "./components/compte-components/ResetPassword";
 
 const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -39,6 +40,7 @@ const App = ({ currentUser, setCurrentUser, clearCurrentUser }) => {
         <Route path="/panier" component={Panier} />
         <Route path="/inscription" component={Inscription} />
         <Route path="/forget-password" component={ForgetPassword} />
+        <Route path="/reset-password/:email/:token" component={ResetPassword} />
         <RouterCompte />
         <Route path="/navCompte" component={NavCompte} />
         <Route path="/indexcompte" component={RouterCompte} />

@@ -37,7 +37,7 @@ const Connexion = props => {
       // eslint-disable-next-line react/prop-types
       props.setCurrentUser(res.data);
       // eslint-disable-next-line react/prop-types
-      props.history.push("/navCompte");
+      props.history.push("/moncompte");
       //localStorage.setItem("user", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
     } catch (error) {
@@ -53,8 +53,8 @@ const Connexion = props => {
 
   return (
     <div className="connexion-div">
-      {error}
       <div className="wrap">
+        {<span>{error}</span>}
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input

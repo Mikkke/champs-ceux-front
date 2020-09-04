@@ -12,8 +12,8 @@ const RouterCompte = () => {
     //indexcompte
     // <BrowserRouter /* basename="/navCompte" */>
     <div className="main-compte">
-      {console.log("%c Oh my heavens! ", "background: #222; color: red")}
-      {console.log("Historique >> ", Historique)}
+      {/* {console.log("%c Oh my heavens! ", "background: #222; color: red")}
+      {console.log("Historique >> ", Historique)} */}
       <NavCompte />
       <Switch>
         <Route exact path="/produitscompte" component={ProduitsCompte} />
