@@ -17,6 +17,9 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+const apiBaseUrl = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseUrl}/api/profil/login`;
+
 // eslint-disable-next-line react/prop-types
 const Connexion = props => {
   const [error, setError] = useState("");
@@ -27,11 +30,8 @@ const Connexion = props => {
 
   const onSubmit = async data => {
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/profil/login",
-        data
-      );
-      console.log("res :>> ", res);
+      const res = await axios.post(`${initialUrl}`, data);
+      //console.log("res :>> ", res);
       //const auth = res.data.isAuthenticated;
       localStorage.setItem("auth", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
@@ -41,7 +41,7 @@ const Connexion = props => {
       //localStorage.setItem("user", JSON.stringify(res.data));
       // eslint-disable-next-line react/prop-types
     } catch (error) {
-      console.log("error.message :>> ");
+      //console.log("error.message :>> ");
       setError(error.response.data.message);
     }
   };

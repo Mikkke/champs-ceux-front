@@ -11,6 +11,7 @@ import { firebase } from "../../firebase/Firebase";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
 const initialUrl = `${apiBaseURL}/api/produits`;
+const historiqueUrl = `${apiBaseURL}/api/historique/`;
 // eslint-disable-next-line react/prop-types
 const Historique = ({ currentUser }) => {
   // eslint-disable-next-line react/prop-types
@@ -63,7 +64,7 @@ const Historique = ({ currentUser }) => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/historique/${currentId}`).then(res => {
+    axios.get(`${historiqueUrl}${currentId}`).then(res => {
       // console.log("res.data :>> ", res.data);
       setHistory(res.data);
     });

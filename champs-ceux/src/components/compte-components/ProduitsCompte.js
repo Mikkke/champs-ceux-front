@@ -21,9 +21,12 @@ const schema = yup.object().shape({
   description: yup.string().required("ce champs est requis")
 });
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/produits`;
+
 const ProduitsCompte = props => {
-  console.log("props du produit compte :>> ", props);
-  console.log("currentUser du produit compte :>> ");
+  //console.log("props du produit compte :>> ", props);
+  //console.log("currentUser du produit compte :>> ");
 
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
@@ -35,7 +38,7 @@ const ProduitsCompte = props => {
   ) : (
     ""
   );
-  console.log("succesMessage :>> ", succesMessage);
+  //console.log("succesMessage :>> ", succesMessage);
   const onSubmit = async data => {
     /*     console.log("data :>> ", data);
     const formData = new FormData();
@@ -51,15 +54,12 @@ const ProduitsCompte = props => {
       error => {},
       async () => {
         const url = await upload.snapshot.ref.getDownloadURL();
-        console.log("url :>> ", url);
+        //console.log("url :>> ", url);
         data.photo = url;
         try {
-          const res = await axios.post(
-            "http://localhost:8080/api/produits",
-            data
-          );
-          console.log("res :>> ", res);
-          console.log("data ici bas", res.data);
+          const res = await axios.post(`${initialUrl}`, data);
+          //console.log("res :>> ", res);
+          //console.log("data ici bas", res.data);
           setSuccesMessage(res.data);
         } catch (error) {
           console.error(error);

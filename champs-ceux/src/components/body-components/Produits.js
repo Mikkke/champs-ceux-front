@@ -20,7 +20,7 @@ const Produits = props => {
 
   const showModal = id => {
     setOpenModal(true);
-    console.log("id du modal :>> ", id);
+    //console.log("id du modal :>> ", id);
     Axios.get(`${initialUrl}/${id}`)
       .then(res => {
         setProduitInfos(res.data);
@@ -103,7 +103,7 @@ const Produits = props => {
           );
         })
       )}
-      {console.log("Modal :>> ", Modal)}
+      {/* {console.log("Modal :>> ", Modal)} */}
       <Modal showModal={openModal} closeModal={closeModal}>
         {resultInModal}
       </Modal>

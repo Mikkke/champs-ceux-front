@@ -34,10 +34,10 @@ export const fetchProduit = () => {
       .then(res => {
         const produitData = res.data;
         /* console.log("produitData :", produitData); */
-        console.log(
+        /* console.log(
           "produitData.[seller.profil.city] :>> ",
           produitData["produitData.seller.profil.city"]
-        );
+        ); */
         dispatch(fetchProduitSucces(produitData));
       })
       .catch(err => {

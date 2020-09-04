@@ -9,6 +9,10 @@ const schema = yup.object().shape({
     .email()
     .required("ce champs est requis")
 });
+
+const apiBaseUrl = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseUrl}/api/forget-password`;
+
 const ForgetPassword = () => {
   const { register, errors, handleSubmit } = useForm({
     validationSchema: schema
@@ -16,11 +20,8 @@ const ForgetPassword = () => {
 
   const onSubmit = async data => {
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/forget-password",
-        data
-      );
-      console.log("res :>> ", res);
+      const res = await axios.post(`${initialUrl}`, data);
+      //console.log("res :>> ", res);
     } catch (error) {
       console.log("error :>> ", error);
     }

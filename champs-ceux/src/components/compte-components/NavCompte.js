@@ -7,19 +7,19 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/profil/sign-out`;
+
 const NavCompte = props => {
   //console.log("props de navcompte :>> ", props);
   //console.log("props  nav co:>> ", props);
   const { register, handleSubmit } = useForm();
   const onSubmit = async data => {
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/profil/sign-out",
-        data
-      );
+      const res = await axios.post(`${initialUrl}`, data);
 
-      console.log("res :>> ", res);
-      console.log("res.data :>> ", res.data);
+      //console.log("res :>> ", res);
+      //onsole.log("res.data :>> ", res.data);
       props.clearCurrentUser(res.data);
       localStorage.clear();
     } catch (error) {
@@ -40,15 +40,15 @@ const NavCompte = props => {
   const vendeur = () => {
     if (props.currentUser) {
       if (props.currentUser.sellerId) {
-        console.log("je vend");
+        //console.log("je vend");
         return <Link to="/produitscompte">Produit</Link>;
       }
       if (props.currentUser.buyerId) {
-        console.log("j'achete");
+        //console.log("j'achete");
 
         return <Link to="/achat">Mes achats</Link>;
       }
-      console.log("props.currentUser.id :>> ");
+      //console.log("props.currentUser.id :>> ");
     }
   };
 

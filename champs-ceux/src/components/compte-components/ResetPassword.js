@@ -10,6 +10,9 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/forget-password/reset`;
+
 const ResetPassword = props => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -24,19 +27,16 @@ const ResetPassword = props => {
     let resetToken = props.match.params.token;
     setEmailr(email);
     setToken(resetToken);
-    console.log("email :>> ", email);
-    console.log("resetToken :>> ", resetToken);
+    //console.log("email :>> ", email);
+    //console.log("resetToken :>> ", resetToken);
   }, [props.match.params.email, props.match.params.token]);
 
-  console.log("props :>> ", props);
+  //console.log("props :>> ", props);
   const onSubmit = async data => {
     if (password === confirmPassword) {
       try {
-        const res = await axios.post(
-          "http://localhost:8080/api/forget-password/reset",
-          data
-        );
-        console.log("res.data :>> ", res);
+        const res = await axios.post(`${initialUrl}`, data);
+        //console.log("res.data :>> ", res);
         props.history.push("/compte");
       } catch (error) {
         console.log("error :>> ", error);

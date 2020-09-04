@@ -19,6 +19,9 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+const apiBaseUrl = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseUrl}/api/send-message`;
+
 const Contact = () => {
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
@@ -26,11 +29,8 @@ const Contact = () => {
 
   const onSubmit = async data => {
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/send-message",
-        data
-      );
-      console.log("res.data :>> ", res.data);
+      const res = await axios.post(`${initialUrl}`, data);
+      //console.log("res.data :>> ", res.data);
     } catch (error) {
       console.log(error);
     }

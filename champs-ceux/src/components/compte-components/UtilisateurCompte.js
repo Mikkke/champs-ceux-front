@@ -4,17 +4,18 @@ import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import Axios from "axios";
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/profil/delete-profil`;
+
 const Utilisateur = ({ currentUser, history }) => {
   const { handleSubmit, register } = useForm();
   const isAuth = localStorage.getItem("auth");
-  console.log("currentUser :>> du utilisateur ", currentUser);
+  //console.log("currentUser :>> du utilisateur ", currentUser);
   //console.log("isAuth de produit :>> ", isAuth);
   const onSubmit = async data => {
     localStorage.clear();
     try {
-      const res = await Axios.post(
-        "http://localhost:8080/api/profil/delete-profil"
-      );
+      const res = await Axios.post(`${initialUrl}`);
       history.push("/compte");
     } catch (error) {
       console.log("error :>> ", error);

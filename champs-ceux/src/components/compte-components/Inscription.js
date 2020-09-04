@@ -38,6 +38,9 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
+const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/profil/register`;
+
 // eslint-disable-next-line react/prop-types
 const Inscription = ({ history }) => {
   const { register, handleSubmit, errors } = useForm({
@@ -51,18 +54,15 @@ const Inscription = ({ history }) => {
   /*   const [adress, setAdress] = useState(""); */
 
   const onSubmit = async data => {
-    console.log("data :>> ", data);
+    // console.log("data :>> ", data);
     if (password === confirmPassword) {
       try {
-        const res = await axios.post(
-          "http://localhost:8080/api/profil/register",
-          data
-        );
-        console.log("res.data.response :>> ", res.data.message);
+        const res = await axios.post(`${initialUrl}`, data);
+        //console.log("res.data.response :>> ", res.data.message);
         // eslint-disable-next-line react/prop-types
         history.push("/compte");
       } catch (error) {
-        console.log("error :>> ", error.response.data.message);
+        //console.log("error :>> ", error.response.data.message);
         setError(error.response.data.message);
       }
     } else {
