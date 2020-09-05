@@ -10,8 +10,8 @@ const schema = yup.object().shape({
     .required("ce champs est requis")
 });
 
-const apiBaseURL = process.env.REACT_APP_BASE_API;
-const initialUrl = `${apiBaseURL}/api/forget-password/reset`;
+/* const apiBaseURL = process.env.REACT_APP_BASE_API;
+conshttp://localhost:8080/api/profil/sign-out= `${apiBaseURL}/api/forget-password/reset`; */
 
 const ResetPassword = props => {
   const [password, setPassword] = useState("");
@@ -35,7 +35,10 @@ const ResetPassword = props => {
   const onSubmit = async data => {
     if (password === confirmPassword) {
       try {
-        const res = await axios.post(`${initialUrl}`, data);
+        const res = await axios.post(
+          `http://localhost:8080/api/forget-password/reset`,
+          data
+        );
         //console.log("res.data :>> ", res);
         props.history.push("/compte");
       } catch (error) {

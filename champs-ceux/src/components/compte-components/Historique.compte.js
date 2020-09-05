@@ -10,8 +10,8 @@ import { FaCheck } from "react-icons/fa";
 import { firebase } from "../../firebase/Firebase";
 
 const apiBaseURL = process.env.REACT_APP_BASE_API;
-const initialUrl = `${apiBaseURL}/api/produits`;
-const historiqueUrl = `${apiBaseURL}/api/historique/`;
+/* const initialUrl = `${apiBaseURL}/api/produits`;
+const historiqueUrl = `${apiBaseURL}/api/historique/`; */
 // eslint-disable-next-line react/prop-types
 const Historique = ({ currentUser }) => {
   // eslint-disable-next-line react/prop-types
@@ -64,7 +64,7 @@ const Historique = ({ currentUser }) => {
   };
 
   useEffect(() => {
-    axios.get(`${historiqueUrl}${currentId}`).then(res => {
+    axios.get(`http://localhost:8080/api/historique/${currentId}`).then(res => {
       // console.log("res.data :>> ", res.data);
       setHistory(res.data);
     });
@@ -74,7 +74,7 @@ const Historique = ({ currentUser }) => {
     console.log("updateData au debut du show:>> ", updateData);
     // console.log("id du modal :>> ", id);
     await axios
-      .get(`${initialUrl}/${id}`)
+      .get(`http://localhost:8080/api/produits/${id}`)
       .then(res => {
         //console.log("res.data id du showmodal :>> ", res.data.id);
         setUpdateData(res.data);
@@ -181,7 +181,7 @@ const Historique = ({ currentUser }) => {
   );
   const deleteProduct = async id => {
     await axios
-      .delete(`${initialUrl}/${id}`)
+      .delete(`http://localhost:8080/api/produits/${id}`)
       /* .then(res => {
         //console.log(res.data);
       }) */
@@ -211,7 +211,10 @@ const Historique = ({ currentUser }) => {
           console.log("url :>> ", url);
           data.photo = url;
           try {
-            const res = await axios.put(`${initialUrl}/${id}`, data);
+            const res = await axios.put(
+              `http://localhost:8080/api/produits/${id}`,
+              data
+            );
             console.log("res :>> ", res);
             console.log("data ici bas", res.data);
           } catch (error) {
@@ -222,7 +225,10 @@ const Historique = ({ currentUser }) => {
       );
     } else {
       try {
-        const res = await axios.put(`${initialUrl}/${id}`, data);
+        const res = await axios.put(
+          `http://localhost:8080/api/produits/${id}`,
+          data
+        );
         console.log("res :>> ", res);
         console.log("data ici bas", res.data);
         setSuccesMessage(res.data);

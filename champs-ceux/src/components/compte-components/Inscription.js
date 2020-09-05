@@ -57,7 +57,10 @@ const Inscription = ({ history }) => {
     // console.log("data :>> ", data);
     if (password === confirmPassword) {
       try {
-        const res = await axios.post(`${initialUrl}`, data);
+        const res = await axios.post(
+          `http://localhost:8080/api/profil/register`,
+          data
+        );
         //console.log("res.data.response :>> ", res.data.message);
         // eslint-disable-next-line react/prop-types
         history.push("/compte");

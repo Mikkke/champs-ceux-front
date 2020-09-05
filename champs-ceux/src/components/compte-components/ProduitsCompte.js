@@ -21,8 +21,8 @@ const schema = yup.object().shape({
   description: yup.string().required("ce champs est requis")
 });
 
-const apiBaseURL = process.env.REACT_APP_BASE_API;
-const initialUrl = `${apiBaseURL}/api/produits`;
+/* const apiBaseURL = process.env.REACT_APP_BASE_API;
+const initialUrl = `${apiBaseURL}/api/produits`; */
 
 const ProduitsCompte = props => {
   //console.log("props du produit compte :>> ", props);
@@ -57,7 +57,10 @@ const ProduitsCompte = props => {
         //console.log("url :>> ", url);
         data.photo = url;
         try {
-          const res = await axios.post(`${initialUrl}`, data);
+          const res = await axios.post(
+            `http://localhost:8080/api/produits`,
+            data
+          );
           //console.log("res :>> ", res);
           //console.log("data ici bas", res.data);
           setSuccesMessage(res.data);

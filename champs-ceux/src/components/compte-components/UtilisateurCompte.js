@@ -15,7 +15,9 @@ const Utilisateur = ({ currentUser, history }) => {
   const onSubmit = async data => {
     localStorage.clear();
     try {
-      const res = await Axios.post(`${initialUrl}`);
+      const res = await Axios.post(
+        `http://localhost:8080/api/profil/delete-profil`
+      );
       history.push("/compte");
     } catch (error) {
       console.log("error :>> ", error);
